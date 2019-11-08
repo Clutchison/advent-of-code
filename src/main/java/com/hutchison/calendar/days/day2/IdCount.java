@@ -1,4 +1,4 @@
-package com.hutchison.day.day2;
+package com.hutchison.calendar.days.day2;
 
 import lombok.Getter;
 import lombok.Value;

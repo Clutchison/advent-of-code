@@ -1,6 +1,6 @@
-package com.hutchison.day.day1;
+package com.hutchison.calendar.days.day1;
 
-import com.hutchison.day.Day;
+import com.hutchison.calendar.Day;
 
 import java.util.HashSet;
 import java.util.List;

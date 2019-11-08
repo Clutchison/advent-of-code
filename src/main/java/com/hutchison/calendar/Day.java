@@ -1,4 +1,4 @@
-package com.hutchison.day;
+package com.hutchison.calendar;
 
 
 import com.hutchison.util.AocIO;
@@ -10,7 +10,7 @@ import java.util.List;
 
 abstract public class Day {
 
-    private static final String PREFIX = "C:\\Users\\sean.hutchison\\Projects\\IntelliJ\\personal\\advent-of-code\\src\\main\\java\\com\\hutchison\\day";
+    private static final String PREFIX = "C:\\Users\\sean.hutchison\\Projects\\IntelliJ\\personal\\advent-of-code\\src\\main\\java\\com\\hutchison\\day\\days";
     protected Console console = Console.getInstance();
 
     abstract public void part1();

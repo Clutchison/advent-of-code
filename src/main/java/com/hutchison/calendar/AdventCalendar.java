@@ -1,8 +1,7 @@
-package com.hutchison;
+package com.hutchison.calendar;
 
-import com.hutchison.day.Day;
-import com.hutchison.day.day1.Day1;
-import com.hutchison.day.day2.Day2;
+import com.hutchison.calendar.days.day1.Day1;
+import com.hutchison.calendar.days.day2.Day2;
 import com.hutchison.util.Console;
 import lombok.Value;
 
@@ -12,14 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Value
-class AdventCalendar {
+public class AdventCalendar {
 
     private static final Map<Integer, Class> days = new HashMap<Integer, Class>() {{
         put(1, Day1.class);
         put(2, Day2.class);
     }};
 
-    void run() {
+    public void run() {
         do {
             runPart(initDay());
         } while (Console.getInstance().request("Again? (y/n)").equals("y"));

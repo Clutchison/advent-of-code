@@ -1,7 +1,7 @@
-package com.hutchison.day.day2;
+package com.hutchison.calendar.days.day2;
 
 
-import com.hutchison.day.Day;
+import com.hutchison.calendar.Day;
 
 import java.util.Comparator;
 import java.util.HashSet;
