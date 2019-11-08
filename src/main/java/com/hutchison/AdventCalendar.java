@@ -12,15 +12,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Value
-public class AdventCalendar {
+class AdventCalendar {
 
     private static final Map<Integer, Class> days = new HashMap<Integer, Class>() {{
         put(1, Day1.class);
         put(2, Day2.class);
     }};
 
-    public void run() {
-        runPart(initDay());
+    void run() {
+        do {
+            runPart(initDay());
+        } while (Console.getInstance().request("Again? (y/n)").equals("y"));
     }
 
     private static void runPart(Day day) {
@@ -33,6 +35,8 @@ public class AdventCalendar {
             case "2":
                 day.part2();
                 break;
+            default:
+                throw new RuntimeException("Invalid part");
         }
         long endTime = System.currentTimeMillis();
         long total = endTime - startTime;

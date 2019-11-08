@@ -10,19 +10,16 @@ import java.util.stream.Collectors;
 
 public class Day2 extends Day {
 
-    private static final String INPUT_LOCATION = "C:\\Users\\sean.hutchison\\Projects\\IntelliJ\\personal\\advent-of-code\\src\\main\\java\\com\\hutchison\\day\\day2\\input.txt";
-    private static final String INPUT_SUFFIX = "\\day2\\input.txt";
-
     @Override
     public void part1() {
-        List<String> ids = super.getInput(INPUT_SUFFIX);
+        List<String> ids = super.getInput();
         IdCount idCount = IdCount.count(new HashSet<>(ids));
         console.print("Hash Function: " + idCount.getTwoCount() + " x " + idCount.getThreeCount() + " = " + idCount.getProduct());
     }
 
     @Override
     public void part2() {
-        List<String> ids = super.getInput(INPUT_SUFFIX)
+        List<String> ids = super.getInput()
                 .stream()
                 .sorted(Comparator.comparingInt(this::getIntValue))
                 .collect(Collectors.toList());

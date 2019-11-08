@@ -17,8 +17,9 @@ abstract public class Day {
 
     abstract public void part2();
 
-    public final List<String> getInput(String suffix) {
-        String input = AocIO.readFile(new File(PREFIX + "/" + suffix));
+    protected final List<String> getInput() {
+        File inputFile = new File(PREFIX + "/" + this.getClass().getSimpleName().toLowerCase() + "/input.txt");
+        String input = AocIO.readFile(inputFile);
         return Arrays.asList(input.split("\n"));
     }
 }
