@@ -4,8 +4,8 @@ package com.hutchison.day.day2;
 import com.hutchison.day.Day;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Day2 extends Day {
@@ -16,13 +16,13 @@ public class Day2 extends Day {
     @Override
     public void part1() {
         List<String> ids = super.getInput(INPUT_SUFFIX);
-        IdCount idCount = IdCount.count(ids);
+        IdCount idCount = IdCount.count(new HashSet<>(ids));
         console.print("Hash Function: " + idCount.getTwoCount() + " x " + idCount.getThreeCount() + " = " + idCount.getProduct());
     }
 
     @Override
     public void part2() {
-        List<String> ids = getIds()
+        List<String> ids = super.getInput(INPUT_SUFFIX)
                 .stream()
                 .sorted(Comparator.comparingInt(this::getIntValue))
                 .collect(Collectors.toList());

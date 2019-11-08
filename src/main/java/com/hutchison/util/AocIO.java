@@ -20,9 +20,9 @@ public class AocIO {
             }
             return resultStringBuilder.toString();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Could not find frequency file: " + e);
+            throw new RuntimeException("Could not find input file: " + e);
         } catch (IOException e) {
-            throw new RuntimeException("Error reading frequency file: " + e);
+            throw new RuntimeException("Error reading input file: " + e);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.hutchison.day;
 
+
 import com.hutchison.util.AocIO;
 import com.hutchison.util.Console;
 
