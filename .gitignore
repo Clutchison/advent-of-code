@@ -1,0 +1,64 @@
+.idea
+target
+
+# Compiled source #
+###################
+bin
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+/target
+*.lck
+*/target/*
+
+# Packages #
+############
+*.7z
+*.dmg
+*.gz
+*.iso
+*.war
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+ehthumbs.db
+__MACOSX
+#Icon?
+Thumbs.db
+*.lock
+*.swp
+*.out
+
+# Project files #
+#################
+.idea
+*.iml
+*.ipr
+*.iws
+atlassian-ide-plugin.xml
+.classpath
+.project
+.settings
+rebel.xml
+MANIFEST.MF
+
+# Netbeans files #
+##################
+#build
+dist
+nbproject
+
+.sts4-cache
