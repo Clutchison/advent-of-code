@@ -20,7 +20,9 @@ public class AdventCalendar {
 
     public void run() {
         do {
-            runPart(initDay());
+            String input = Console.getInstance().request("Enter the day that you would like to run" +
+                    "\n Valid days: " + days.keySet().toString());
+            runPart(initDay(input));
         } while (Console.getInstance().request("Again? (y/n)").equals("y"));
     }
 
@@ -42,11 +44,9 @@ public class AdventCalendar {
         Console.getInstance().print("Run time: " + total + " milliseconds.");
     }
 
-    private static Day initDay() {
-        String input = Console.getInstance().request("Enter the day that you would like to run" +
-                "\n Valid days: " + days.keySet().toString());
-        Class c = days.get(Integer.valueOf(input));
-        if (c == null) throw new RuntimeException("No class for input: " + input);
+    private static Day initDay(String dayNum) {
+        Class c = days.get(Integer.valueOf(dayNum));
+        if (c == null) throw new RuntimeException("No class for input: " + dayNum);
         Constructor<?> ctor = null;
         try {
             ctor = c.getConstructor();

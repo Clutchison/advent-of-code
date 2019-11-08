@@ -10,8 +10,9 @@ import java.util.List;
 
 abstract public class Day {
 
-    private static final String PREFIX = "C:\\Users\\sean.hutchison\\Projects\\IntelliJ\\personal\\advent-of-code\\src\\main\\java\\com\\hutchison\\day\\days";
+    private static final String PREFIX = "C:\\Users\\sean.hutchison\\Projects\\IntelliJ\\personal\\advent-of-code\\src\\main\\java\\com\\hutchison\\calendar\\days";
     protected Console console = Console.getInstance();
+    protected final List<String> input = getInput();
 
     abstract public void part1();
 

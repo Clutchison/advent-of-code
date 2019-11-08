@@ -12,15 +12,13 @@ public class Day2 extends Day {
 
     @Override
     public void part1() {
-        List<String> ids = super.getInput();
-        IdCount idCount = IdCount.count(new HashSet<>(ids));
+        IdCount idCount = IdCount.count(new HashSet<>(input));
         console.print("Hash Function: " + idCount.getTwoCount() + " x " + idCount.getThreeCount() + " = " + idCount.getProduct());
     }
 
     @Override
     public void part2() {
-        List<String> ids = super.getInput()
-                .stream()
+        List<String> ids = input.stream()
                 .sorted(Comparator.comparingInt(this::getIntValue))
                 .collect(Collectors.toList());
         String answer = extractAnswer(ids);
@@ -59,9 +57,5 @@ public class Day2 extends Day {
 
     private int getIntValue(String s) {
         return s.chars().sum();
-    }
-
-    private boolean checkIds(String id1, String id2) {
-        return false;
     }
 }

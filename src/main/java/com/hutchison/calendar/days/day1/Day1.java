@@ -41,7 +41,7 @@ public class Day1 extends Day {
     }
 
     private List<Integer> getFrequencies() {
-        return super.getInput().stream()
+        return input.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
