@@ -6,7 +6,7 @@ public class Day3 extends Day {
 
     @Override
     public void part1() {
-
+        console.print("In Day 3");
     }
 
     @Override

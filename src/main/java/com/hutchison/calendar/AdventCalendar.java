@@ -2,6 +2,7 @@ package com.hutchison.calendar;
 
 import com.hutchison.calendar.days.day1.Day1;
 import com.hutchison.calendar.days.day2.Day2;
+import com.hutchison.calendar.days.day3.Day3;
 import com.hutchison.util.Console;
 import lombok.Value;
 
@@ -13,9 +14,13 @@ import java.util.Map;
 @Value
 public class AdventCalendar {
 
+    private static final int DEFAULT_DAY = 3;
+    private static final int DEFAULT_PART = 1;
+
     private static final Map<Integer, Class> days = new HashMap<Integer, Class>() {{
         put(1, Day1.class);
         put(2, Day2.class);
+        put(3, Day3.class);
     }};
 
     public void run() {
@@ -28,6 +33,7 @@ public class AdventCalendar {
 
     private static void runPart(Day day) {
         String request = Console.getInstance().request("Enter the part that you would like to run: 1/2");
+        if (request.equals("")) request = String.valueOf(DEFAULT_PART);
         long startTime = System.currentTimeMillis();
         switch (request) {
             case "1":
@@ -45,7 +51,7 @@ public class AdventCalendar {
     }
 
     private static Day initDay(String dayNum) {
-        Class c = days.get(Integer.valueOf(dayNum));
+        Class c = dayNum.equals("") ? days.get(DEFAULT_DAY) : days.get(Integer.valueOf(dayNum));
         if (c == null) throw new RuntimeException("No class for input: " + dayNum);
         Constructor<?> ctor = null;
         try {
