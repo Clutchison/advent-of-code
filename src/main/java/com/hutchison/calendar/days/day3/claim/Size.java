@@ -5,9 +5,9 @@ import lombok.Builder;
 import lombok.Value;
 
 @Value
-public class Size {
+class Size {
 
-    private static String SIZE_PATTERN = "^\\dx\\d$";
+    private static String SIZE_PATTERN = "^\\d+x\\d+$";
 
     private int width;
     private int height;

@@ -1,6 +1,5 @@
-package com.hutchison.calendar.days.day3.claim;
+package com.hutchison.calendar.days.day3;
 
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Value;
 
@@ -12,14 +11,20 @@ public class Coordinate {
     private int x;
     private int y;
 
-    @Builder(access = AccessLevel.PRIVATE)
+    @Builder
     private Coordinate(int x,
                        int y) {
         this.x = x;
         this.y = y;
     }
 
-    static Coordinate fromString(String s) {
+    @Override
+    public String toString() {
+        return x + ":" + y;
+    }
+
+
+    public static Coordinate fromString(String s) {
         if (!s.matches(COORDINATE_PATTERN)) throw new RuntimeException("Malformed coordinate string: " + s);
 
         return Coordinate.builder()
