@@ -1,18 +1,13 @@
-package com.hutchison.day.day1;
+package com.hutchison.calendar.days.y2018.day1;
 
-import com.hutchison.day.Day;
-import com.hutchison.util.AocIO;
+import com.hutchison.calendar.Day;
 
-import java.io.File;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Day1 extends Day {
-
-    private static final String INPUT_LOCATION = "C:\\Users\\sean.hutchison\\Projects\\IntelliJ\\personal\\advent-of-code\\src\\com\\hutchison\\day\\day1\\frequencies";
+public class Day1Year18 extends Day {
 
     @Override
     public void part1() {
@@ -46,8 +41,7 @@ public class Day1 extends Day {
     }
 
     private List<Integer> getFrequencies() {
-        String input = AocIO.readFile(new File(INPUT_LOCATION));
-        return Arrays.stream(input.split("\n"))
+        return input.stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

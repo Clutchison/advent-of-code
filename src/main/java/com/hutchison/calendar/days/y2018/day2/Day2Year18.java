@@ -1,29 +1,24 @@
-package com.hutchison.day.day2;
+package com.hutchison.calendar.days.y2018.day2;
 
 
-import com.hutchison.day.Day;
+import com.hutchison.calendar.Day;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Day2 extends Day {
-
-    private static final String INPUT_LOCATION = "C:\\Users\\sean.hutchison\\Projects\\IntelliJ\\personal\\advent-of-code\\src\\main\\java\\com\\hutchison\\day\\day2\\input.txt";
-    private static final String INPUT_SUFFIX = "\\day2\\input.txt";
+public class Day2Year18 extends Day {
 
     @Override
     public void part1() {
-        List<String> ids = super.getInput(INPUT_SUFFIX);
-        IdCount idCount = IdCount.count(ids);
+        IdCount idCount = IdCount.count(new HashSet<>(input));
         console.print("Hash Function: " + idCount.getTwoCount() + " x " + idCount.getThreeCount() + " = " + idCount.getProduct());
     }
 
     @Override
     public void part2() {
-        List<String> ids = getIds()
-                .stream()
+        List<String> ids = input.stream()
                 .sorted(Comparator.comparingInt(this::getIntValue))
                 .collect(Collectors.toList());
         String answer = extractAnswer(ids);
@@ -62,9 +57,5 @@ public class Day2 extends Day {
 
     private int getIntValue(String s) {
         return s.chars().sum();
-    }
-
-    private boolean checkIds(String id1, String id2) {
-        return false;
     }
 }
