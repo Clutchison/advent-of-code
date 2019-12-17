@@ -1,12 +1,12 @@
-package com.hutchison.calendar.days.day3;
+package com.hutchison.calendar.days.y2018.day3;
 
 import com.hutchison.calendar.Day;
-import com.hutchison.calendar.days.day3.claim.Claim;
+import com.hutchison.calendar.days.y2018.day3.claim.Claim;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Day3 extends Day {
+public class Day3Year18 extends Day {
 
     @Override
     public void part1() {

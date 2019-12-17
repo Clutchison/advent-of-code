@@ -1,6 +1,6 @@
-package com.hutchison.calendar.days.day3.claim;
+package com.hutchison.calendar.days.y2018.day3.claim;
 
-import com.hutchison.calendar.days.day3.Coordinate;
+import com.hutchison.calendar.days.y2018.day3.Coordinate;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;

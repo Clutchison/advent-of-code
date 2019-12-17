@@ -1,4 +1,4 @@
-package com.hutchison.calendar.days.day2;
+package com.hutchison.calendar.days.y2018.day2;
 
 
 import com.hutchison.calendar.Day;
@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Day2 extends Day {
+public class Day2Year18 extends Day {
 
     @Override
     public void part1() {

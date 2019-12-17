@@ -1,4 +1,4 @@
-package com.hutchison.calendar.days.day3.claim;
+package com.hutchison.calendar.days.y2018.day3.claim;
 
 import lombok.AccessLevel;
 import lombok.Builder;

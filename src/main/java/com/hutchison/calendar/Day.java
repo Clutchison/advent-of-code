@@ -10,7 +10,7 @@ import java.util.List;
 
 abstract public class Day {
 
-    private static final String PREFIX = "src\\main\\java\\com\\hutchison\\calendar\\days";
+    private static final String PREFIX = "src\\main\\java\\com\\hutchison\\calendar\\days\\y2019";
     protected Console console = Console.getInstance();
     protected final List<String> input = getInput();
 

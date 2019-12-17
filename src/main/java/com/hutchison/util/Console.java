@@ -32,4 +32,8 @@ public class Console {
     public void print(String s) {
         System.out.println(s);
     }
+
+    public void print(long n) {
+        print(String.valueOf(n));
+    }
 }

@@ -1,4 +1,4 @@
-package com.hutchison.calendar.days.day3;
+package com.hutchison.calendar.days.y2018.day3;
 
 import lombok.Builder;
 import lombok.Value;

@@ -1,8 +1,7 @@
 package com.hutchison.calendar;
 
-import com.hutchison.calendar.days.day1.Day1;
-import com.hutchison.calendar.days.day2.Day2;
-import com.hutchison.calendar.days.day3.Day3;
+import com.hutchison.calendar.days.y2019.day1.Day1;
+import com.hutchison.calendar.days.y2019.day2.Day2;
 import com.hutchison.util.Console;
 import lombok.Value;
 
@@ -14,13 +13,19 @@ import java.util.Map;
 @Value
 public class AdventCalendar {
 
-    private static final int DEFAULT_DAY = 3;
-    private static final int DEFAULT_PART = 1;
+    private static final int DEFAULT_DAY = 1;
+    private static final int DEFAULT_PART = 2;
+
+    // 2018
+//    private static final Map<Integer, Class> days = new HashMap<Integer, Class>() {{
+//        put(1, Day1Year18.class);
+//        put(2, Day2Year18.class);
+//        put(3, Day3Year18.class);
+//    }};
 
     private static final Map<Integer, Class> days = new HashMap<Integer, Class>() {{
         put(1, Day1.class);
         put(2, Day2.class);
-        put(3, Day3.class);
     }};
 
     public void run() {

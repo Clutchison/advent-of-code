@@ -1,6 +1,6 @@
-package com.hutchison.calendar.days.day3;
+package com.hutchison.calendar.days.y2018.day3;
 
-import com.hutchison.calendar.days.day3.claim.Claim;
+import com.hutchison.calendar.days.y2018.day3.claim.Claim;
 import lombok.Value;
 
 import java.util.HashMap;
