@@ -1,9 +1,10 @@
-package com.hutchison.calendar.days.y2019.day2;
+package com.hutchison.calendar.days.y2019.day2.intcode;
 
 public enum OpType {
     ADD, MULTIPLY, STOP;
 
     public static OpType fromCode(int code) {
+        if (code > 99) code = code % 100;
         switch (code) {
             case 1:
                 return ADD;
