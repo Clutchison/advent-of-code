@@ -9,7 +9,7 @@ import com.hutchison.calendar.intcode.operation.bool.LessThanOperation;
 import com.hutchison.calendar.intcode.operation.arithmetic.MultiplyOperation;
 import com.hutchison.calendar.intcode.operation.OpType;
 import com.hutchison.calendar.intcode.operation.io.OutputOperation;
-import com.hutchison.calendar.intcode.operation.StopOperation;
+import com.hutchison.calendar.intcode.operation.stop.StopOperation;
 import lombok.Builder;
 import lombok.Value;
 

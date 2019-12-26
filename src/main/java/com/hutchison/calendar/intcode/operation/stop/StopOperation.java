@@ -1,6 +1,7 @@
-package com.hutchison.calendar.intcode.operation;
+package com.hutchison.calendar.intcode.operation.stop;
 
 import com.hutchison.calendar.intcode.Codes;
+import com.hutchison.calendar.intcode.operation.Operation;
 
 public class StopOperation implements Operation {
     /**

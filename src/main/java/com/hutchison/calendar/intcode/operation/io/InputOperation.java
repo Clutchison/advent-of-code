@@ -1,12 +1,10 @@
 package com.hutchison.calendar.intcode.operation.io;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.Operation;
 
-import java.util.List;
 import java.util.Scanner;
 
-public class InputOperation implements Operation {
+public class InputOperation extends IOOperation {
 
     private final Scanner in = new Scanner(System.in);
 
@@ -18,19 +16,9 @@ public class InputOperation implements Operation {
      */
     @Override
     public Codes apply(Codes incomingCodes) {
-        List<Integer> codes = incomingCodes.getCodes();
-        Integer cursor = incomingCodes.getCursor();
-        Operation.validateCursorPosition(cursor + 1, codes.size());
-
-        int input = getInput();
-        Integer insertIndex = codes.get(cursor + 1);
-        codes.set(insertIndex, input);
-
-        return Codes.builder()
-                .codes(codes)
-                .cursor(cursor + 2)
-                .stopped(false)
-                .build();
+        return perform(incomingCodes,
+                () -> incomingCodes.getCodes()
+                        .set(incomingCodes.getCodes().get(incomingCodes.getCursor() + 1), getInput()));
     }
 
     private int getInput() {
