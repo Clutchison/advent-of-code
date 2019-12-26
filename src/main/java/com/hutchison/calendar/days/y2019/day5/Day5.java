@@ -8,8 +8,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Day5 extends Day {
+
     @Override
     public void part1() {
+        run();
+    }
+
+    @Override
+    public void part2() {
+        run();
+    }
+
+    private void run() {
         IntcodeComputer computer = new IntcodeComputer(getMappedInput());
         computer.run();
         console.print("Answer: " + computer.getCodes().getCode(0));
@@ -19,10 +29,5 @@ public class Day5 extends Day {
         return Arrays.stream(input.get(0).split(","))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void part2() {
-
     }
 }

@@ -1,7 +1,7 @@
 package com.hutchison.calendar.intcode.operation;
 
 public enum OpType {
-    ADD, MULTIPLY, INPUT, OUTPUT, STOP;
+    ADD, MULTIPLY, INPUT, OUTPUT, JUMP_IF_TRUE, JUMP_IF_FALSE, LESS_THAN, EQUALS, STOP;
 
     public static OpType fromCode(int code) {
         switch (code % 100) {
@@ -13,6 +13,14 @@ public enum OpType {
                 return INPUT;
             case 4:
                 return OUTPUT;
+            case 5:
+                return JUMP_IF_TRUE;
+            case 6:
+                return JUMP_IF_FALSE;
+            case 7:
+                return LESS_THAN;
+            case 8:
+                return EQUALS;
             case 99:
                 return STOP;
             default:

@@ -1,6 +1,7 @@
-package com.hutchison.calendar.intcode.operation;
+package com.hutchison.calendar.intcode.operation.io;
 
 import com.hutchison.calendar.intcode.Codes;
+import com.hutchison.calendar.intcode.operation.Operation;
 
 import java.util.List;
 import java.util.Scanner;
