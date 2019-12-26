@@ -6,7 +6,7 @@ import java.util.List;
 
 import static com.hutchison.calendar.days.y2019.day2.intcode.operation.Operation.getOpCodeString;
 import static com.hutchison.calendar.days.y2019.day2.intcode.operation.Operation.getValueFromCodes;
-import static com.hutchison.calendar.days.y2019.day2.intcode.operation.ParamMode.POSTIONAL;
+import static com.hutchison.calendar.days.y2019.day2.intcode.operation.Operation.validateCursorPosition;
 
 public class AddOperation implements Operation {
 
@@ -20,13 +20,12 @@ public class AddOperation implements Operation {
     public Codes apply(Codes incomingCodes) {
         List<Integer> codes = incomingCodes.getCodes();
         Integer cursor = incomingCodes.getCursor();
-        if (cursor + 3 >= codes.size())
-            throw new RuntimeException("Codes do not have enough remaining values to perform add operation.");
-        String opCodeString = getOpCodeString(codes.get(cursor), 5);
+        validateCursorPosition(cursor + 3, codes.size());
+        String opCodeString = getOpCodeString(codes.get(cursor));
 
         int val1 = getValueFromCodes(codes, opCodeString.charAt(0), cursor + 1);
         int val2 = getValueFromCodes(codes, opCodeString.charAt(1), cursor + 2);
-        int sumIndex = getValueFromCodes(codes, POSTIONAL, cursor + 3);
+        int sumIndex = codes.get(cursor + 3);
 
         codes.set(sumIndex, val1 + val2);
 

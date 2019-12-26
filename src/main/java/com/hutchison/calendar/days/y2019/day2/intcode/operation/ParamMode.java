@@ -1,12 +1,12 @@
 package com.hutchison.calendar.days.y2019.day2.intcode.operation;
 
 public enum ParamMode {
-   POSTIONAL, IMMEDIATE;
+   POSITIONAL, IMMEDIATE;
 
    public static ParamMode fromChar(char c) {
       switch (c) {
          case '0':
-            return POSTIONAL;
+            return POSITIONAL;
          case '1':
             return IMMEDIATE;
          default:

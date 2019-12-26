@@ -20,9 +20,18 @@ public class IntcodeComputer {
     }
 
     public void run() {
-        while (!codes.isStopped()) {
-            codes = codes.performNextOperation();
+        int DEBUG_INDEX = 10;
+        for (int i = 0; i < codes.getCodes().size(); i++) {
+            if (!codes.isStopped()) {
+                if (codes.getCursor() == DEBUG_INDEX) {
+                    System.out.println("At " + DEBUG_INDEX);
+                }
+                codes = codes.performNextOperation();
+            } else {
+                return;
+            }
         }
+        System.out.println("Exceeded maximum operations.");
     }
 
     private void printCodes() {
