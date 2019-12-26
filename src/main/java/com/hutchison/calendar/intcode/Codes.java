@@ -1,17 +1,16 @@
-package com.hutchison.calendar.days.y2019.day2.intcode;
+package com.hutchison.calendar.intcode;
 
-import com.hutchison.calendar.days.y2019.day2.intcode.operation.AddOperation;
-import com.hutchison.calendar.days.y2019.day2.intcode.operation.InputOperation;
-import com.hutchison.calendar.days.y2019.day2.intcode.operation.MultiplyOperation;
-import com.hutchison.calendar.days.y2019.day2.intcode.operation.OpType;
-import com.hutchison.calendar.days.y2019.day2.intcode.operation.OutputOperation;
-import com.hutchison.calendar.days.y2019.day2.intcode.operation.StopOperation;
+import com.hutchison.calendar.intcode.operation.AddOperation;
+import com.hutchison.calendar.intcode.operation.InputOperation;
+import com.hutchison.calendar.intcode.operation.MultiplyOperation;
+import com.hutchison.calendar.intcode.operation.OpType;
+import com.hutchison.calendar.intcode.operation.OutputOperation;
+import com.hutchison.calendar.intcode.operation.StopOperation;
 import lombok.Builder;
 import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 @Value
 public class Codes {

@@ -1,4 +1,4 @@
-package com.hutchison.calendar.days.y2019.day2.intcode.operation;
+package com.hutchison.calendar.intcode.operation;
 
 public enum OpType {
     ADD, MULTIPLY, INPUT, OUTPUT, STOP;

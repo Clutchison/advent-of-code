@@ -1,7 +1,7 @@
 package com.hutchison.calendar.days.y2019.day2;
 
 import com.hutchison.calendar.Day;
-import com.hutchison.calendar.days.y2019.day2.intcode.IntcodeComputer;
+import com.hutchison.calendar.intcode.IntcodeComputer;
 
 import java.util.Arrays;
 import java.util.List;

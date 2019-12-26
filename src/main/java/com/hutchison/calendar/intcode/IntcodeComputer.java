@@ -1,4 +1,4 @@
-package com.hutchison.calendar.days.y2019.day2.intcode;
+package com.hutchison.calendar.intcode;
 
 import com.sun.deploy.util.StringUtils;
 import lombok.Getter;
