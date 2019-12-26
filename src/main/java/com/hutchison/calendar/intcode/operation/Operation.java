@@ -19,10 +19,7 @@ public interface Operation extends UnaryOperator<Codes> {
 
     static String getOpCodeString(int opCode, int size) {
         String s = StringUtils.leftPad(String.valueOf(opCode), size, "0");
-        return new StringBuilder()
-                .append(s, 0, s.length() - 2)
-                .reverse()
-                .toString();
+        return new StringBuilder().append(s, 0, s.length() - 2).reverse().toString();
     }
 
     static Integer getValueFromCodes(List<Integer> codes, ParamMode pm, int codeIndex) {
