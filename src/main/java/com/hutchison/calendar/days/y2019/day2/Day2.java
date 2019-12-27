@@ -12,7 +12,7 @@ public class Day2 extends Day {
     @Override
     public void part1() {
         List<Integer> modifiedInput = getModifiedInput(12, 2);
-        IntcodeComputer computer = new IntcodeComputer(modifiedInput);
+        IntcodeComputer computer = IntcodeComputer.fromList(modifiedInput);
         computer.run();
         console.print(computer.getCodes().getCode(0));
     }
@@ -21,7 +21,7 @@ public class Day2 extends Day {
     public void part2() {
         for (int i = 0; i < 100; i++) {
             for (int j = 0; j < 100; j++) {
-                IntcodeComputer computer = new IntcodeComputer(getModifiedInput(i, j));
+                IntcodeComputer computer = IntcodeComputer.fromList(getModifiedInput(i, j));
                 computer.run();
                 if (computer.getCodes().getCode(0) == 19690720) {
                     int sum = 100 * i + j;

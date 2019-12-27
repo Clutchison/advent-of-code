@@ -11,12 +11,16 @@ public class IntcodeComputer {
 
     private Codes codes;
 
-    public IntcodeComputer(List<Integer> codes) {
-        this.codes = Codes.builder()
+    private IntcodeComputer(Codes codes) {
+        this.codes = codes;
+    }
+
+    public static IntcodeComputer fromList(List<Integer> codes) {
+        return new IntcodeComputer(Codes.builder()
                 .codes(codes)
                 .cursor(0)
                 .stopped(false)
-                .build();
+                .build());
     }
 
     public void run() {
