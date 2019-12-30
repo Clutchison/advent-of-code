@@ -3,7 +3,9 @@ package com.hutchison.calendar.days.y2019.day7.amplifier;
 import com.hutchison.calendar.intcode.IntcodeComputer;
 import lombok.Value;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Value
@@ -12,7 +14,14 @@ public class AmplifierSeries {
     List<Amplifier> amplifiers;
 
     private AmplifierSeries(List<Amplifier> amplifiers) {
-        this.amplifiers = amplifiers;
+        this.amplifiers = Collections.unmodifiableList(amplifiers);
+    }
+
+    public int getOutput() {
+        AtomicInteger output = new AtomicInteger();
+        output.set(0);
+        amplifiers.forEach(amplifier -> output.set(amplifier.compute(output.get())));
+        return output.get();
     }
 
     public static AmplifierSeriesBuilder builder() {

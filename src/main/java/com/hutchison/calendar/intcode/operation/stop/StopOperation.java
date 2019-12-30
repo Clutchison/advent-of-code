@@ -12,9 +12,7 @@ public class StopOperation implements Operation {
     @Override
     public Codes apply(Codes incomingCodes) {
         System.out.println("Stop command received.");
-        return Codes.builder()
-                .codes(incomingCodes.getCodes())
-                .cursor(incomingCodes.getCursor())
+        return incomingCodes.toBuilder()
                 .stopped(true)
                 .build();
     }

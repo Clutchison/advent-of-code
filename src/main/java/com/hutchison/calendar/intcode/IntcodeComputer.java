@@ -3,6 +3,7 @@ package com.hutchison.calendar.intcode;
 import com.sun.deploy.util.StringUtils;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,11 +17,21 @@ public class IntcodeComputer {
     }
 
     public static IntcodeComputer fromList(List<Integer> codes) {
+        return fromList(codes, null);
+    }
+
+    public static IntcodeComputer fromList(List<Integer> codes, List<Integer> inputs) {
         return new IntcodeComputer(Codes.builder()
-                .codes(codes)
+                .codes(new ArrayList<>(codes))
                 .cursor(0)
+                .inputs(inputs)
                 .stopped(false)
                 .build());
+    }
+
+    public void run(List<Integer> inputs) {
+        codes = codes.toBuilder().inputs(inputs).build();
+        run();
     }
 
     public void run() {

@@ -1,15 +1,15 @@
 package com.hutchison.calendar.intcode;
 
+import com.hutchison.calendar.intcode.operation.OpType;
+import com.hutchison.calendar.intcode.operation.StopOperation;
 import com.hutchison.calendar.intcode.operation.arithmetic.AddOperation;
+import com.hutchison.calendar.intcode.operation.arithmetic.MultiplyOperation;
 import com.hutchison.calendar.intcode.operation.bool.EqualsOperation;
+import com.hutchison.calendar.intcode.operation.bool.LessThanOperation;
 import com.hutchison.calendar.intcode.operation.io.InputOperation;
+import com.hutchison.calendar.intcode.operation.io.OutputOperation;
 import com.hutchison.calendar.intcode.operation.jump.JumpIfFalseOperation;
 import com.hutchison.calendar.intcode.operation.jump.JumpIfTrueOperation;
-import com.hutchison.calendar.intcode.operation.bool.LessThanOperation;
-import com.hutchison.calendar.intcode.operation.arithmetic.MultiplyOperation;
-import com.hutchison.calendar.intcode.operation.OpType;
-import com.hutchison.calendar.intcode.operation.io.OutputOperation;
-import com.hutchison.calendar.intcode.operation.StopOperation;
 import lombok.Builder;
 import lombok.Value;
 
@@ -29,15 +29,19 @@ import static com.hutchison.calendar.intcode.operation.OpType.STOP;
 @Value
 public class Codes {
 
-    private final List<Integer> codes;
-    private Integer cursor;
-    private boolean stopped;
+    final List<Integer> codes;
+    Integer cursor;
+    boolean stopped;
+    List<Integer> inputs;
+    List<Integer> outputs;
 
-    @Builder
-    private Codes(List<Integer> codes, Integer cursor, boolean stopped) {
+    @Builder(toBuilder = true)
+    private Codes(List<Integer> codes, Integer cursor, boolean stopped, List<Integer> inputs, List<Integer> outputs) {
         this.codes = codes;
         this.cursor = cursor;
         this.stopped = stopped;
+        this.inputs = inputs;
+        this.outputs = outputs;
     }
 
     public List<Integer> getCodes() {
@@ -101,7 +105,11 @@ public class Codes {
         public Codes build() {
             if (this.codes == null) throw new RuntimeException("Codes required.");
             if (this.cursor < 0) throw new RuntimeException("Cursor can't be negative: " + cursor);
-            return new Codes(this.codes, this.cursor, this.stopped && this.cursor < this.codes.size());
+            return new Codes(this.codes,
+                    this.cursor,
+                    this.stopped && this.cursor < this.codes.size(),
+                    this.inputs == null ? new ArrayList<>() : this.inputs,
+                    this.outputs == null ? new ArrayList<>() : this.outputs);
         }
     }
 }

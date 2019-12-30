@@ -1,5 +1,7 @@
 package com.hutchison.calendar.days.y2019.day7.amplifier;
 
+import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.Value;
 
 import java.util.Arrays;
@@ -11,6 +13,7 @@ import java.util.stream.Collectors;
 @Value
 public class PhaseSequence {
 
+    @Getter(AccessLevel.NONE)
     static final List<Integer> LEGAL_LIST = Collections.unmodifiableList(Arrays.asList(0, 1, 2, 3, 4));
     List<Integer> phases;
 

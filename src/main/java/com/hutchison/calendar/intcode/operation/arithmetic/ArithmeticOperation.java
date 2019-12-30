@@ -24,10 +24,9 @@ public abstract class ArithmeticOperation implements Operation {
 
         codes.set(sumIndex, function.apply(val1, val2));
 
-        return Codes.builder()
+        return incomingCodes.toBuilder()
                 .codes(codes)
                 .cursor(cursor + 4)
-                .stopped(false)
                 .build();
     }
 }

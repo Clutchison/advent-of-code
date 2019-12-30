@@ -1,7 +1,6 @@
 package com.hutchison.calendar.intcode.operation.bool;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.bool.BooleanOperation;
 
 public class EqualsOperation extends BooleanOperation {
     /**

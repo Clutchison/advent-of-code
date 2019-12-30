@@ -6,10 +6,10 @@ import com.hutchison.calendar.intcode.operation.Operation;
 import java.util.List;
 import java.util.function.BiPredicate;
 
-import static com.hutchison.calendar.intcode.operation.ParamMode.fromChar;
 import static com.hutchison.calendar.intcode.operation.Operation.getOpCodeString;
 import static com.hutchison.calendar.intcode.operation.Operation.getValueFromCodes;
 import static com.hutchison.calendar.intcode.operation.Operation.validateCursorPosition;
+import static com.hutchison.calendar.intcode.operation.ParamMode.fromChar;
 
 public abstract class BooleanOperation implements Operation {
 
@@ -23,10 +23,9 @@ public abstract class BooleanOperation implements Operation {
         int valToStore = predicate.test(val1, val2) ? 1 : 0;
         codes.set(codes.get(cursor + 3), valToStore);
 
-        return Codes.builder()
+        return incomingCodes.toBuilder()
                 .codes(codes)
                 .cursor(cursor + 4)
-                .stopped(false)
                 .build();
     }
 }

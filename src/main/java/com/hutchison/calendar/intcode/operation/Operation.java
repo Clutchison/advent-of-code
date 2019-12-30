@@ -12,7 +12,6 @@ import static com.hutchison.calendar.intcode.operation.ParamMode.fromChar;
 
 public interface Operation extends UnaryOperator<Codes> {
 
-
     static String getOpCodeString(int opCode) {
         return getOpCodeString(opCode, 5);
     }
