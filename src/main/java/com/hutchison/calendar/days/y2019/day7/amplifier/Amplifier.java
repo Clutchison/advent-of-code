@@ -20,7 +20,9 @@ public class Amplifier {
 
     public int compute(int input) {
         computer.run(Arrays.asList(phase, input));
-        return computer.getCodes().getOutputs().get(0);
+        return computer.getCodes().getOutputs().size() > 0 ?
+                computer.getCodes().getOutputs().get(computer.getCodes().getOutputs().size() - 1) :
+                -1;
     }
 
     static class AmplifierBuilder {

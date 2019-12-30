@@ -1,7 +1,7 @@
 package com.hutchison.calendar.intcode;
 
 import com.hutchison.calendar.intcode.operation.OpType;
-import com.hutchison.calendar.intcode.operation.StopOperation;
+import com.hutchison.calendar.intcode.operation.stop.StopOperation;
 import com.hutchison.calendar.intcode.operation.arithmetic.AddOperation;
 import com.hutchison.calendar.intcode.operation.arithmetic.MultiplyOperation;
 import com.hutchison.calendar.intcode.operation.bool.EqualsOperation;

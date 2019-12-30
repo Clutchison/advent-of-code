@@ -18,7 +18,7 @@ import java.util.Map;
 public class AdventCalendar {
 
     private static final int DEFAULT_DAY = 7;
-    private static final int DEFAULT_PART = 1;
+    private static final int DEFAULT_PART = 2;
 
     // 2018
 //    private static final Map<Integer, Class> days = new HashMap<Integer, Class>() {{

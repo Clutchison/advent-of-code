@@ -14,7 +14,10 @@ import java.util.stream.Collectors;
 public class PhaseSequence {
 
     @Getter(AccessLevel.NONE)
-    static final List<Integer> LEGAL_LIST = Collections.unmodifiableList(Arrays.asList(0, 1, 2, 3, 4));
+    static final List<List<Integer>> LEGAL_LISTS = Arrays.asList(
+            Collections.unmodifiableList(Arrays.asList(0, 1, 2, 3, 4)),
+            Collections.unmodifiableList(Arrays.asList(5, 6, 7, 8, 9))
+    );
     List<Integer> phases;
 
     private PhaseSequence(List<Integer> phases) {
@@ -26,16 +29,25 @@ public class PhaseSequence {
         return new PhaseSequence(phases);
     }
 
+    @Override
+    public String toString() {
+        return getPhaseString(this.getPhases());
+    }
+
     private static void validatePhases(List<Integer> phases) {
-        if (phases.size() != LEGAL_LIST.size())
-            throw new RuntimeException("Phase Sequence must be exactly 5 phases long! Given: " + getPhaseString(phases));
-        if (new HashSet<>(phases).size() != LEGAL_LIST.size())
-            throw new RuntimeException("Phases cannot contain duplicates! Given: " + getPhaseString(phases));
-        if (!phases.stream().sorted().collect(Collectors.toList()).equals(LEGAL_LIST))
-            throw new RuntimeException("Phases must be exactly the numbers 0-4. Given: " + getPhaseString(phases));
+        if (LEGAL_LISTS.stream()
+                .noneMatch(legalList -> phases.size() == legalList.size() &&
+                        new HashSet<>(phases).size() == legalList.size() &&
+                        phases.stream().sorted().collect(Collectors.toList()).equals(legalList))) {
+            throw new RuntimeException("Given phases are not a legal sequence: " + getPhaseString(phases) +
+                    ". Legal sequences: " + LEGAL_LISTS.stream()
+                    .map(PhaseSequence::getPhaseString)
+                    .reduce((s1, s2) -> s1 + ", " + s2)
+                    .orElse("FAILED TO PARSE LEGAL LISTS"));
+        }
     }
 
     private static String getPhaseString(List<Integer> phases) {
-        return phases.stream().map(String::valueOf).collect(Collectors.joining(", "));
+        return "[" + phases.stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]";
     }
 }

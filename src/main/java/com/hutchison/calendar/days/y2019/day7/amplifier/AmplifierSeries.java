@@ -12,9 +12,11 @@ import java.util.stream.Collectors;
 public class AmplifierSeries {
 
     List<Amplifier> amplifiers;
+    PhaseSequence phaseSequence;
 
-    private AmplifierSeries(List<Amplifier> amplifiers) {
+    private AmplifierSeries(List<Amplifier> amplifiers, PhaseSequence phaseSequence) {
         this.amplifiers = Collections.unmodifiableList(amplifiers);
+        this.phaseSequence = phaseSequence;
     }
 
     public int getOutput() {
@@ -56,7 +58,7 @@ public class AmplifierSeries {
                             .phase(phase)
                             .build())
                     .collect(Collectors.toList());
-            return new AmplifierSeries(amplifiers);
+            return new AmplifierSeries(amplifiers, phaseSequence);
         }
     }
 }

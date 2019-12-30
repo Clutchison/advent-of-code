@@ -25,17 +25,22 @@ public class Day7 extends Day {
         AmplifierSeries bestSeries = seriesList.stream()
                 .max(Comparator.comparingInt(AmplifierSeries::getOutput))
                 .orElseThrow(() -> new RuntimeException("Failed to find max series"));
-        console.print("Best series output: " + bestSeries.getOutput());
+        console.print("Best series output: " + bestSeries.getOutput() + ", phase setting: " + bestSeries.getPhaseSequence().toString());
     }
 
     private List<Integer> getCodesFromInput() {
         return Arrays.stream(input.get(0).split(","))
-                    .map(Integer::valueOf)
-                    .collect(Collectors.toList());
+                .map(Integer::valueOf)
+                .collect(Collectors.toList());
     }
 
     @Override
     public void part2() {
+        PhaseSequence phase1 = PhaseSequence.fromList(Arrays.asList(3, 1, 2, 0, 4));
+        List<PhaseSequence> feedbackSequences = Combination.getAllCombinations(Arrays.asList(9, 8, 7, 6, 5)).stream()
+                .map(PhaseSequence::fromList)
+                .collect(Collectors.toList());
+
 
 
     }
