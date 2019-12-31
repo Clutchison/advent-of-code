@@ -1,11 +1,12 @@
 package com.hutchison.calendar.intcode;
 
-import com.sun.deploy.util.StringUtils;
+import com.hutchison.calendar.intcode.operation.OpType;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static com.hutchison.calendar.intcode.operation.OpType.OUTPUT;
 
 @Getter
 public class IntcodeComputer {
@@ -29,20 +30,22 @@ public class IntcodeComputer {
                 .build());
     }
 
-    public void run(List<Integer> inputs) {
+    public boolean hasStarted() {
+        return codes.getCursor() > 0;
+    }
+
+    public int run() {
+        return run(new ArrayList<>());
+    }
+
+    public int run(List<Integer> inputs) {
         codes = codes.toBuilder().inputs(inputs).build();
-        run();
-    }
-
-    public void run() {
         while (!codes.isStopped()) {
-            codes = codes.performNextOperation();
+            OpType opType = codes.getOpType();
+            boolean shouldReturn = opType.equals(OUTPUT);
+            opType.apply(codes);
+            if (shouldReturn) return codes.getLastOutput();
         }
-    }
-
-    private void printCodes() {
-        System.out.println("Codes: " + StringUtils.join(codes.getCodes().stream()
-                .map(String::valueOf)
-                .collect(Collectors.toList()), ","));
+        return -1;
     }
 }

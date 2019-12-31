@@ -5,7 +5,6 @@ import lombok.Value;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Value
@@ -20,10 +19,15 @@ public class AmplifierSeries {
     }
 
     public int getOutput() {
-        AtomicInteger output = new AtomicInteger();
-        output.set(0);
-        amplifiers.forEach(amplifier -> output.set(amplifier.compute(output.get())));
-        return output.get();
+        int output = 0;
+        List<Amplifier> tempAmps = amplifiers.stream().map(a -> a.toBuilder().build()).collect(Collectors.toList());
+        while (true) {
+            for (Amplifier amplifier : tempAmps) {
+                int returnedValue = amplifier.compute(output);
+                if (returnedValue == -1) return output;
+                output = returnedValue;
+            }
+        }
     }
 
     public static AmplifierSeriesBuilder builder() {

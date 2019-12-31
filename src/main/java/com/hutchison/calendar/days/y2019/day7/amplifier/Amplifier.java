@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Value;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @Value
 public class Amplifier {
@@ -12,17 +14,17 @@ public class Amplifier {
     int phase;
     IntcodeComputer computer;
 
-    @Builder
+    @Builder(toBuilder = true)
     private Amplifier(Integer phase, IntcodeComputer computer) {
         this.phase = phase;
         this.computer = computer;
     }
 
     public int compute(int input) {
-        computer.run(Arrays.asList(phase, input));
-        return computer.getCodes().getOutputs().size() > 0 ?
-                computer.getCodes().getOutputs().get(computer.getCodes().getOutputs().size() - 1) :
-                -1;
+        List<Integer> inputs = computer.hasStarted() ?
+                Collections.singletonList(input) :
+                Arrays.asList(phase, input);
+        return computer.run(inputs);
     }
 
     static class AmplifierBuilder {

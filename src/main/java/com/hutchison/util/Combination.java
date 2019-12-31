@@ -2,6 +2,7 @@ package com.hutchison.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // Cribbed from https://www.baeldung.com/java-array-permutations
 public class Combination {
@@ -33,7 +34,7 @@ public class Combination {
         if (elements.size() > 10) throw new RuntimeException("ELements size cannot exceed 10");
         List<List<T>> masterList = new ArrayList<>();
         findCombos(elements.size(), elements, masterList);
-        return masterList;
+        return masterList.stream().distinct().collect(Collectors.toList());
     }
 }
 
