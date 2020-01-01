@@ -1,17 +1,16 @@
-package com.hutchison.calendar.days.y2019.day2.intcode.operation;
+package com.hutchison.calendar.intcode.operation;
 
-import com.hutchison.calendar.days.y2019.day2.intcode.Codes;
+import com.hutchison.calendar.intcode.Codes;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 import java.util.function.UnaryOperator;
 
-import static com.hutchison.calendar.days.y2019.day2.intcode.operation.ParamMode.POSITIONAL;
-import static com.hutchison.calendar.days.y2019.day2.intcode.operation.ParamMode.fromChar;
+import static com.hutchison.calendar.intcode.operation.ParamMode.POSITIONAL;
+import static com.hutchison.calendar.intcode.operation.ParamMode.fromChar;
 
 
 public interface Operation extends UnaryOperator<Codes> {
-
 
     static String getOpCodeString(int opCode) {
         return getOpCodeString(opCode, 5);

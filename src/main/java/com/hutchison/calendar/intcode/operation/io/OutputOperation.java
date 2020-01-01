@@ -1,10 +1,12 @@
-package com.hutchison.calendar.days.y2019.day2.intcode.operation;
+package com.hutchison.calendar.intcode.operation.io;
 
-import com.hutchison.calendar.days.y2019.day2.intcode.Codes;
+import com.hutchison.calendar.intcode.Codes;
+import com.hutchison.calendar.intcode.operation.Operation;
+import com.hutchison.calendar.intcode.operation.ParamMode;
 
 import java.util.List;
 
-import static com.hutchison.calendar.days.y2019.day2.intcode.operation.Operation.getOpCodeString;
+import static com.hutchison.calendar.intcode.operation.Operation.getOpCodeString;
 
 public class OutputOperation implements Operation {
     /**
@@ -22,10 +24,11 @@ public class OutputOperation implements Operation {
         int position = cursor + 1;
         int outputVal = Operation.getValueFromCodes(codes, ParamMode.fromChar(opCodeString.charAt(0)), position);
         System.out.println(String.format("Cursor at %d, outputting value at position %d: %d", cursor, position, outputVal));
-        return Codes.builder()
-                .codes(codes)
+        List<Integer> outputs = incomingCodes.getOutputs();
+        outputs.add(outputVal);
+        return incomingCodes.toBuilder()
                 .cursor(cursor + 2)
-                .stopped(false)
+                .outputs(outputs)
                 .build();
     }
 }

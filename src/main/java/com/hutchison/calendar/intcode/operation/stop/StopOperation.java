@@ -1,6 +1,7 @@
-package com.hutchison.calendar.days.y2019.day2.intcode.operation;
+package com.hutchison.calendar.intcode.operation.stop;
 
-import com.hutchison.calendar.days.y2019.day2.intcode.Codes;
+import com.hutchison.calendar.intcode.Codes;
+import com.hutchison.calendar.intcode.operation.Operation;
 
 public class StopOperation implements Operation {
     /**
@@ -12,9 +13,7 @@ public class StopOperation implements Operation {
     @Override
     public Codes apply(Codes incomingCodes) {
         System.out.println("Stop command received.");
-        return Codes.builder()
-                .codes(incomingCodes.getCodes())
-                .cursor(incomingCodes.getCursor())
+        return incomingCodes.toBuilder()
                 .stopped(true)
                 .build();
     }
