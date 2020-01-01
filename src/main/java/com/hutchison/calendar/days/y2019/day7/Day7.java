@@ -4,9 +4,8 @@ import com.hutchison.calendar.Day;
 import com.hutchison.calendar.days.y2019.day7.amplifier.AmplifierSeries;
 import com.hutchison.calendar.days.y2019.day7.amplifier.PhaseSequence;
 import com.hutchison.util.Combination;
-import org.apache.commons.math3.util.Combinations;
+import org.apache.commons.collections4.iterators.PermutationIterator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -53,7 +52,6 @@ public class Day7 extends Day {
     }
 
     @Override
-    // todo Wrong answers: 5960606 (low)
     public void part2() {
         List<AmplifierSeries> seriesList = apacheCombos(Arrays.asList(9, 8, 7, 6, 5), getCodesFromInput());
         List<Integer> outputs = seriesList.stream()
@@ -64,30 +62,13 @@ public class Day7 extends Day {
         console.print("Best output: " + outputs.get(outputs.size() - 1));
     }
 
-    public List<AmplifierSeries> apacheCombos(List<Integer> phases, List<Integer> codes) {
-        Combinations ints = new Combinations(7, 5);
-        int total = 0;
-        for (int[] t : ints) {
-            total++;
-//            System.out.println(Arrays.toString(t));
-        }
-        List<int[]> stream = StreamSupport.stream(
-                Spliterators.spliteratorUnknownSize(
-                        new Combinations(5, 5).iterator(), 0), false)
-                .collect(Collectors.toList());
-        return stream.stream()
-                .map(order -> AmplifierSeries.builder()
+    private List<AmplifierSeries> apacheCombos(List<Integer> phases, List<Integer> codes) {
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(
+                new PermutationIterator<>(phases), 0), false)
+                .map(phase -> AmplifierSeries.builder()
                         .codes(codes)
-                        .phases(PhaseSequence.fromList(mapToPhase(order, phases)))
+                        .phases(PhaseSequence.fromList(phase))
                         .build())
                 .collect(Collectors.toList());
-    }
-
-    private List<Integer> mapToPhase(int[] order, List<Integer> phases) {
-        List<Integer> list = new ArrayList<>();
-        for (int value : order) {
-            list.add(phases.get(value));
-        }
-        return list;
     }
 }

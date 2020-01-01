@@ -43,7 +43,7 @@ public class IntcodeComputer {
         while (!codes.isStopped()) {
             OpType opType = codes.getOpType();
             boolean shouldReturn = opType.equals(OUTPUT);
-            opType.apply(codes);
+            codes = opType.getOp().apply(codes);
             if (shouldReturn) return codes.getLastOutput();
         }
         return -1;

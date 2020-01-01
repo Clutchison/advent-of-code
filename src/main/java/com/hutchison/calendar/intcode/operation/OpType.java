@@ -10,6 +10,7 @@ import com.hutchison.calendar.intcode.operation.io.OutputOperation;
 import com.hutchison.calendar.intcode.operation.jump.JumpIfFalseOperation;
 import com.hutchison.calendar.intcode.operation.jump.JumpIfTrueOperation;
 import com.hutchison.calendar.intcode.operation.stop.StopOperation;
+import lombok.Getter;
 
 public enum OpType {
     ADD(new AddOperation()),
@@ -22,14 +23,11 @@ public enum OpType {
     EQUALS(new EqualsOperation()),
     STOP(new StopOperation());
 
+    @Getter
     private final Operation op;
 
     OpType(Operation op) {
         this.op = op;
-    }
-
-    public void apply(Codes codes) {
-        this.op.apply(codes);
     }
 
     public static OpType fromCode(int code) {
