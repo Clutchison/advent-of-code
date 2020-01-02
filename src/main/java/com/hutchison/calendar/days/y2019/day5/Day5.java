@@ -25,9 +25,9 @@ public class Day5 extends Day {
         console.print("Answer: " + computer.getCodes().getCode(0));
     }
 
-    private List<Integer> getMappedInput() {
+    private List<Double> getMappedInput() {
         return Arrays.stream(input.get(0).split(","))
-                .map(Integer::parseInt)
+                .map(Double::parseDouble)
                 .collect(Collectors.toList());
     }
 }

@@ -19,20 +19,19 @@ public class InputOperation implements Operation {
      */
     @Override
     public Codes apply(Codes incomingCodes) {
-        List<Integer> inputs = new ArrayList<>(incomingCodes.getInputs());
-        List<Integer> codes = incomingCodes.getCodes();
+        List<Double> inputs = new ArrayList<>(incomingCodes.getInputs());
+        List<Double> codes = incomingCodes.getCodes();
         Integer cursor = incomingCodes.getCursor();
         Operation.validateCursorPosition(cursor + 1, codes.size());
 
-        int input;
-        if (inputs == null || inputs.size() == 0) {
+        double input;
+        if (inputs.size() == 0) {
             input = getInput();
         } else {
             input = inputs.get(0);
             inputs.remove(0);
         }
-        Integer insertIndex = codes.get(cursor + 1);
-        codes.set(insertIndex, input);
+        codes.set(codes.get(cursor + 1).intValue(), input);
 
         return incomingCodes.toBuilder()
                 .codes(codes)

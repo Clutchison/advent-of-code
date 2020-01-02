@@ -12,20 +12,21 @@ import static com.hutchison.calendar.intcode.operation.ParamMode.fromChar;
 
 public interface Operation extends UnaryOperator<Codes> {
 
-    static String getOpCodeString(int opCode) {
+    static String getOpCodeString(double opCode) {
         return getOpCodeString(opCode, 5);
     }
 
-    static String getOpCodeString(int opCode, int size) {
-        String s = StringUtils.leftPad(String.valueOf(opCode), size, "0");
+    static String getOpCodeString(double opCode, int size) {
+        String sub = String.valueOf(opCode).substring(0, String.valueOf(opCode).indexOf("."));
+        String s = StringUtils.leftPad(sub, size, "0");
         return new StringBuilder().append(s, 0, s.length() - 2).reverse().toString();
     }
 
-    static Integer getValueFromCodes(List<Integer> codes, ParamMode pm, int codeIndex) {
-        return pm == POSITIONAL ? codes.get(codes.get(codeIndex)) : codes.get(codeIndex);
+    static Double getValueFromCodes(List<Double> codes, ParamMode pm, int codeIndex) {
+        return pm == POSITIONAL ? codes.get(codes.get(codeIndex).intValue()) : codes.get(codeIndex);
     }
 
-    static Integer getValueFromCodes(List<Integer> codes, char opChar, int codeIndex) {
+    static Double getValueFromCodes(List<Double> codes, char opChar, int codeIndex) {
         return getValueFromCodes(codes, fromChar(opChar), codeIndex);
     }
 

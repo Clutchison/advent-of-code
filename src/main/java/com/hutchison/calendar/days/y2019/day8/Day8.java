@@ -11,17 +11,7 @@ import java.util.stream.Collectors;
 public class Day8 extends Day {
     @Override
     public void part1() {
-        int width = 25;
-        int height = 6;
-        List<List<Integer>> input = ListUtils.partition(getIntsFromInput(), width * height);
-        System.out.println(String.format("%d * %d = %d", width, height, width * height));
-
-        List<Layer> layers = input.stream()
-                .map(integers -> Layer.builder()
-                        .intList(integers)
-                        .rowLength(width)
-                        .build())
-                .collect(Collectors.toList());
+        List<Layer> layers = getLayers(25, 6);
 
         Layer bestLayer = layers.stream()
                 .min(Comparator.comparingInt(layer -> layer.getIntCount(0)))
@@ -30,12 +20,27 @@ public class Day8 extends Day {
         System.out.println(String.format("Layer with most 0s product of 1s and 2s: %d",
                 bestLayer.getIntCount(1) * bestLayer.getIntCount(2)));
 
+        System.out.println("Visual rep: \n" + bestLayer.printVisual());
+
     }
 
-    private int getKey(List<Integer> input, int width, int height, Integer i) {
-        int i1 = input.indexOf(i) / (width * height);
-        System.out.println(String.format("%d / %d = %d", input.indexOf(i), width * height, i1));
-        return i1;
+    @Override
+    public void part2() {
+        List<Layer> layers = getLayers(25, 6);
+        Layer stacked = Layer.stack(layers);
+        System.out.println(stacked.printVisual());
+    }
+
+    private List<Layer> getLayers(int width, int height) {
+        List<List<Integer>> input = ListUtils.partition(getIntsFromInput(), width * height);
+        System.out.println(String.format("%d * %d = %d", width, height, width * height));
+
+        return input.stream()
+                .map(integers -> Layer.builder()
+                        .intList(integers)
+                        .rowLength(width)
+                        .build())
+                .collect(Collectors.toList());
     }
 
     private List<Integer> getIntsFromInput() {
@@ -43,10 +48,5 @@ public class Day8 extends Day {
                 .mapToObj(i -> String.valueOf((char) i))
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public void part2() {
-
     }
 }

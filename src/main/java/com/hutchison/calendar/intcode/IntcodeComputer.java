@@ -17,11 +17,11 @@ public class IntcodeComputer {
         this.codes = codes;
     }
 
-    public static IntcodeComputer fromList(List<Integer> codes) {
+    public static IntcodeComputer fromList(List<Double> codes) {
         return fromList(codes, null);
     }
 
-    public static IntcodeComputer fromList(List<Integer> codes, List<Integer> inputs) {
+    public static IntcodeComputer fromList(List<Double> codes, List<Double> inputs) {
         return new IntcodeComputer(Codes.builder()
                 .codes(new ArrayList<>(codes))
                 .cursor(0)
@@ -34,11 +34,11 @@ public class IntcodeComputer {
         return codes.getCursor() > 0;
     }
 
-    public int run() {
+    public double run() {
         return run(new ArrayList<>());
     }
 
-    public int run(List<Integer> inputs) {
+    public double run(List<Double> inputs) {
         codes = codes.toBuilder().inputs(inputs).build();
         while (!codes.isStopped()) {
             OpType opType = codes.getOpType();

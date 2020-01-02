@@ -10,14 +10,14 @@ import java.util.List;
 @Value
 public class Codes {
 
-    final List<Integer> codes;
+    List<Double> codes;
     Integer cursor;
     boolean stopped;
-    List<Integer> inputs;
-    List<Integer> outputs;
+    List<Double> inputs;
+    List<Double> outputs;
 
     @Builder(toBuilder = true)
-    private Codes(List<Integer> codes, Integer cursor, boolean stopped, List<Integer> inputs, List<Integer> outputs) {
+    private Codes(List<Double> codes, Integer cursor, boolean stopped, List<Double> inputs, List<Double> outputs) {
         this.codes = codes;
         this.cursor = cursor;
         this.stopped = stopped;
@@ -25,25 +25,23 @@ public class Codes {
         this.outputs = outputs;
     }
 
-    public List<Integer> getCodes() {
+    public List<Double> getCodes() {
         return new ArrayList<>(codes);
     }
 
-    public int getCode(int position) {
+    public double getCode(int position) {
         if (position < 0 || position >= codes.size()) throw new RuntimeException("Position out of bounds.");
         return codes.get(position);
     }
 
     public OpType getOpType() {
-        return OpType.fromCode(codes.get(cursor));
+        Double code = codes.get(cursor);
+        OpType opType = OpType.fromCode(code);
+        if (opType == null) throw new RuntimeException("No OpType for code: " + code);
+        return opType;
     }
 
-    void setCode(int position, int code) {
-        if (position < 0 || position >= codes.size()) throw new RuntimeException("Position out of bounds.");
-        codes.set(position, code);
-    }
-
-    public int getLastOutput() {
+    public double getLastOutput() {
         return outputs.size() > 0 ?
                 outputs.get(outputs.size() - 1) :
                 -1;

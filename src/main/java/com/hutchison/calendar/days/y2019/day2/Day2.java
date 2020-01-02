@@ -11,7 +11,7 @@ public class Day2 extends Day {
 
     @Override
     public void part1() {
-        List<Integer> modifiedInput = getModifiedInput(12, 2);
+        List<Double> modifiedInput = getModifiedInput(12, 2);
         IntcodeComputer computer = IntcodeComputer.fromList(modifiedInput);
         computer.run();
         console.print(computer.getCodes().getCode(0));
@@ -32,9 +32,9 @@ public class Day2 extends Day {
 
     }
 
-    private List<Integer> getModifiedInput(int noun, int verb) {
-        List<Integer> mappedInput = Arrays.stream(input.get(0).split(","))
-                .map(Integer::parseInt)
+    private List<Double> getModifiedInput(double noun, double verb) {
+        List<Double> mappedInput = Arrays.stream(input.get(0).split(","))
+                .map(Double::parseDouble)
                 .collect(Collectors.toList());
         mappedInput.set(1, noun);
         mappedInput.set(2, verb);

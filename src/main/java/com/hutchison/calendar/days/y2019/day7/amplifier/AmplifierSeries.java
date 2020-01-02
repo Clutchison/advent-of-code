@@ -18,12 +18,12 @@ public class AmplifierSeries {
         this.phaseSequence = phaseSequence;
     }
 
-    public int getOutput() {
-        int output = 0;
+    public double getOutput() {
+        double output = 0;
         List<Amplifier> tempAmps = amplifiers.stream().map(a -> a.toBuilder().build()).collect(Collectors.toList());
         while (true) {
             for (Amplifier amplifier : tempAmps) {
-                int returnedValue = amplifier.compute(output);
+                double returnedValue = amplifier.compute(output);
                 if (returnedValue == -1) return output;
                 output = returnedValue;
             }
@@ -36,13 +36,13 @@ public class AmplifierSeries {
 
     public static class AmplifierSeriesBuilder {
 
-        private List<Integer> codes;
+        private List<Double> codes;
         private PhaseSequence phaseSequence;
 
         private AmplifierSeriesBuilder() {
         }
 
-        public AmplifierSeriesBuilder codes(List<Integer> codes) {
+        public AmplifierSeriesBuilder codes(List<Double> codes) {
             this.codes = codes;
             return this;
         }

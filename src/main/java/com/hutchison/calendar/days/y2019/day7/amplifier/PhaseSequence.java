@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Value
 public class PhaseSequence {
 
-    List<Integer> phases;
+    List<Double> phases;
 
     @Getter(AccessLevel.NONE)
     static final List<List<Integer>> LEGAL_LISTS = Arrays.asList(
@@ -20,11 +20,11 @@ public class PhaseSequence {
             Collections.unmodifiableList(Arrays.asList(5, 6, 7, 8, 9))
     );
 
-    private PhaseSequence(List<Integer> phases) {
+    private PhaseSequence(List<Double> phases) {
         this.phases = phases;
     }
 
-    public static PhaseSequence fromList(List<Integer> phases) {
+    public static PhaseSequence fromList(List<Double> phases) {
         validatePhases(phases);
         return new PhaseSequence(phases);
     }
@@ -34,18 +34,20 @@ public class PhaseSequence {
         return getPhaseString(this.getPhases());
     }
 
-    private static void validatePhases(List<Integer> phases) {
-        List<Integer> sorted = phases.stream().sorted().collect(Collectors.toList());
+    private static void validatePhases(List<Double> phases) {
+        List<Integer> sorted = phases.stream().map(Double::intValue).sorted().collect(Collectors.toList());
         if (LEGAL_LISTS.stream().noneMatch(sorted::equals)) {
             throw new RuntimeException("Given phases are not a legal sequence: " + getPhaseString(phases) +
                     ". Legal sequences: " + LEGAL_LISTS.stream()
-                    .map(PhaseSequence::getPhaseString)
+                    .map(d -> getPhaseString(d.stream()
+                            .map(Double::new)
+                            .collect(Collectors.toList())))
                     .reduce((s1, s2) -> s1 + ", " + s2)
                     .orElseThrow(() -> new RuntimeException("Failed to parse legal lists.")));
         }
     }
 
-    private static String getPhaseString(List<Integer> phases) {
+    private static String getPhaseString(List<Double> phases) {
         return "[" + phases.stream().map(String::valueOf).collect(Collectors.joining(", ")) + "]";
     }
 }

@@ -36,4 +36,8 @@ public class Console {
     public void print(long n) {
         print(String.valueOf(n));
     }
+
+    public void print(double d) {
+        print(String.valueOf(d));
+    }
 }

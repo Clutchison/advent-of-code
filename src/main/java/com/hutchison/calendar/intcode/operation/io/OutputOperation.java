@@ -18,13 +18,13 @@ public class OutputOperation implements Operation {
     @Override
     public Codes apply(Codes incomingCodes) {
         int cursor = incomingCodes.getCursor();
-        List<Integer> codes = incomingCodes.getCodes();
+        List<Double> codes = incomingCodes.getCodes();
         Operation.validateCursorPosition(cursor + 1, codes.size());
         String opCodeString = getOpCodeString(codes.get(cursor));
         int position = cursor + 1;
-        int outputVal = Operation.getValueFromCodes(codes, ParamMode.fromChar(opCodeString.charAt(0)), position);
-        System.out.println(String.format("Cursor at %d, outputting value at position %d: %d", cursor, position, outputVal));
-        List<Integer> outputs = incomingCodes.getOutputs();
+        double outputVal = Operation.getValueFromCodes(codes, ParamMode.fromChar(opCodeString.charAt(0)), position);
+        System.out.println(String.format("Cursor at %d, outputting value at position %d: %.0f", cursor, position, outputVal));
+        List<Double> outputs = incomingCodes.getOutputs();
         outputs.add(outputVal);
         return incomingCodes.toBuilder()
                 .cursor(cursor + 2)

@@ -16,37 +16,39 @@ public class Day7 extends Day {
     @Override
     public void part1() {
         List<AmplifierSeries> seriesList = apacheCombos(Arrays.asList(0, 1, 2, 3, 4));
-        int bestOutput = seriesList.stream()
+        double bestOutput = seriesList.stream()
                 .map(AmplifierSeries::getOutput)
-                .max(Comparator.comparingInt(Integer::valueOf))
+                .max(Comparator.comparingDouble(Double::valueOf))
                 .orElseThrow(() -> new RuntimeException("Failed to find max series"));
         console.print("Best series output: " + bestOutput);
     }
 
-    private List<Integer> getCodesFromInput() {
+    private List<Double> getCodesFromInput() {
         return Arrays.stream(input.get(0).split(","))
-                .map(Integer::valueOf)
+                .map(Double::valueOf)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void part2() {
         List<AmplifierSeries> seriesList = apacheCombos(Arrays.asList(9, 8, 7, 6, 5));
-        List<Integer> outputs = seriesList.stream()
+        List<Double> outputs = seriesList.stream()
                 .map(AmplifierSeries::getOutput)
-                .sorted(Comparator.comparingInt(Integer::valueOf))
+                .sorted(Comparator.comparingDouble(Double::valueOf))
                 .peek(o -> System.out.println("Output: " + o))
                 .collect(Collectors.toList());
         console.print("Best output: " + outputs.get(outputs.size() - 1));
     }
 
     private List<AmplifierSeries> apacheCombos(List<Integer> phases) {
-        List<Integer> codes = getCodesFromInput();
+        List<Double> codes = getCodesFromInput();
         return StreamSupport.stream(Spliterators.spliteratorUnknownSize(
                 new PermutationIterator<>(phases), 0), false)
                 .map(phase -> AmplifierSeries.builder()
                         .codes(codes)
-                        .phases(PhaseSequence.fromList(phase))
+                        .phases(PhaseSequence.fromList(phase.stream()
+                                .map(Double::new)
+                                .collect(Collectors.toList())))
                         .build())
                 .collect(Collectors.toList());
     }

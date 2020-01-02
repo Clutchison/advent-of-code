@@ -12,15 +12,15 @@ import static com.hutchison.calendar.intcode.operation.Operation.validateCursorP
 
 public abstract class ArithmeticOperation implements Operation {
 
-    protected final Codes performArithmetic(Codes incomingCodes, BiFunction<Integer, Integer, Integer> function) {
-        List<Integer> codes = incomingCodes.getCodes();
+    protected final Codes performArithmetic(Codes incomingCodes, BiFunction<Double, Double, Double> function) {
+        List<Double> codes = incomingCodes.getCodes();
         Integer cursor = incomingCodes.getCursor();
         validateCursorPosition(cursor + 3, codes.size());
         String opCodeString = getOpCodeString(codes.get(cursor));
 
-        int val1 = getValueFromCodes(codes, opCodeString.charAt(0), cursor + 1);
-        int val2 = getValueFromCodes(codes, opCodeString.charAt(1), cursor + 2);
-        int sumIndex = codes.get(cursor + 3);
+        double val1 = getValueFromCodes(codes, opCodeString.charAt(0), cursor + 1);
+        double val2 = getValueFromCodes(codes, opCodeString.charAt(1), cursor + 2);
+        int sumIndex = codes.get(cursor + 3).intValue();
 
         codes.set(sumIndex, function.apply(val1, val2));
 
