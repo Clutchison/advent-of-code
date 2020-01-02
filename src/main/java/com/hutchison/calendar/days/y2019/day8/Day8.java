@@ -4,6 +4,7 @@ import com.hutchison.calendar.Day;
 import com.hutchison.calendar.days.y2019.day8.dsn.Layer;
 import org.apache.commons.collections4.ListUtils;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,14 @@ public class Day8 extends Day {
                         .rowLength(width)
                         .build())
                 .collect(Collectors.toList());
+
+        Layer bestLayer = layers.stream()
+                .min(Comparator.comparingInt(layer -> layer.getIntCount(0)))
+                .orElseThrow(() -> new RuntimeException("No layer in layers."));
+
+        System.out.println(String.format("Layer with most 0s product of 1s and 2s: %d",
+                bestLayer.getIntCount(1) * bestLayer.getIntCount(2)));
+
     }
 
     private int getKey(List<Integer> input, int width, int height, Integer i) {

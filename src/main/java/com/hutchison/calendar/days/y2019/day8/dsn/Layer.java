@@ -14,6 +14,13 @@ public class Layer {
         this.rows = rows;
     }
 
+    public int getIntCount(int i) {
+        return (int) rows.stream()
+                .flatMap(row -> row.getRow().stream())
+                .filter(i1 -> i1 == i)
+                .count();
+    }
+
     public static LayerBuilder builder() {
         return new LayerBuilder();
     }
