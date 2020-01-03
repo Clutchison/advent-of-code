@@ -58,7 +58,7 @@ public class AmplifierSeries {
             if (codes == null) throw new RuntimeException("Codes required to build AmplifierSeries");
             List<Amplifier> amplifiers = phaseSequence.getPhases().stream()
                     .map(phase -> Amplifier.builder()
-                            .computer(IntcodeComputer.fromList(codes))
+                            .computer(IntcodeComputer.fromList(codes, true))
                             .phase(phase)
                             .build())
                     .collect(Collectors.toList());

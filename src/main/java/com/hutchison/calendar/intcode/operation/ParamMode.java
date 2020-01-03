@@ -35,11 +35,11 @@ public enum ParamMode {
     }
 
     private static BiFunction<Codes, Integer, Double> getPositionalValue(boolean shouldAddBase) {
-        return (codes, index) -> codes.getCodes().get(codes.getCodes().get(index).intValue()) +
-                (shouldAddBase ? codes.getRelativeBase() : 0);
+        return (codes, index) -> codes.getCode(codes.getCode(index).intValue() +
+                (shouldAddBase ? codes.getRelativeBase().intValue() : 0));
     }
 
     private static BiFunction<Codes, Integer, Double> getImmediateValue() {
-        return (codes, index) -> codes.getCodes().get(index);
+        return Codes::getCode;
     }
 }

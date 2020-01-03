@@ -20,7 +20,7 @@ public class Day5 extends Day {
     }
 
     private void run() {
-        IntcodeComputer computer = IntcodeComputer.fromList(getMappedInput());
+        IntcodeComputer computer = IntcodeComputer.fromList(getMappedInput(), false);
         computer.run();
         console.print("Answer: " + computer.getCodes().getCode(0));
     }

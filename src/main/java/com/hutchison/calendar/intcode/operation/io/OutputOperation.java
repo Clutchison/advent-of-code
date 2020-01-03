@@ -2,31 +2,25 @@ package com.hutchison.calendar.intcode.operation.io;
 
 import com.hutchison.calendar.intcode.Codes;
 import com.hutchison.calendar.intcode.operation.Operation;
-import com.hutchison.calendar.intcode.operation.ParamMode;
 
 import java.util.List;
-
-import static com.hutchison.calendar.intcode.operation.Operation.getOpCodeString;
 
 public class OutputOperation implements Operation {
     /**
      * Applies this function to the given argument.
      *
-     * @param incomingCodes the function argument
+     * @param codes the function argument
      * @return the function result
      */
     @Override
-    public Codes apply(Codes incomingCodes) {
-        int cursor = incomingCodes.getCursor();
-        List<Double> codes = incomingCodes.getCodes();
-        Operation.validateCursorPosition(cursor + 1, codes.size());
-        String opCodeString = getOpCodeString(codes.get(cursor));
+    public Codes apply(Codes codes) {
+        int cursor = codes.getCursor();
         int position = cursor + 1;
-        double outputVal = Operation.getValueFromCodes(codes, ParamMode.fromChar(opCodeString.charAt(0)), position);
+        double outputVal = codes.getParameterizedValues(1).get(0);
         System.out.println(String.format("Cursor at %d, outputting value at position %d: %.0f", cursor, position, outputVal));
-        List<Double> outputs = incomingCodes.getOutputs();
+        List<Double> outputs = codes.getOutputs();
         outputs.add(outputVal);
-        return incomingCodes.toBuilder()
+        return codes.toBuilder()
                 .cursor(cursor + 2)
                 .outputs(outputs)
                 .build();

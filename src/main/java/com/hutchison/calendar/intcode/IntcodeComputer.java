@@ -3,7 +3,6 @@ package com.hutchison.calendar.intcode;
 import com.hutchison.calendar.intcode.operation.OpType;
 import lombok.Getter;
 
-import javax.naming.PartialResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +12,20 @@ import static com.hutchison.calendar.intcode.operation.OpType.OUTPUT;
 public class IntcodeComputer {
 
     private Codes codes;
+    boolean seriesMode;
 
-    private IntcodeComputer(Codes codes) {
+    private IntcodeComputer(Codes codes, Boolean seriesMode) {
         this.codes = codes;
+        this.seriesMode = seriesMode;
     }
 
-    public static IntcodeComputer fromList(List<Double> codes) {
+    public static IntcodeComputer fromList(List<Double> codes, boolean seriesMode) {
         return new IntcodeComputer(Codes.builder()
                 .codes(new ArrayList<>(codes))
                 .cursor(0)
                 .stopped(false)
-                .build());
+                .build(),
+                seriesMode);
     }
 
     public boolean hasStarted() {
@@ -36,12 +38,14 @@ public class IntcodeComputer {
 
     public double run(List<Double> inputs) {
         codes = codes.toBuilder().inputs(inputs).build();
+        int commands = 0;
         while (!codes.isStopped()) {
+            commands++;
             OpType opType = codes.getOpType();
-            boolean shouldReturn = opType.equals(OUTPUT);
             codes = opType.getOp().apply(codes);
-            if (shouldReturn) return codes.getLastOutput();
+            if (opType.equals(OUTPUT) && seriesMode) return codes.getLastOutput();
         }
-        return -1;
+        System.out.println("Command total: " + commands);
+        return codes.getLastOutput();
     }
 }

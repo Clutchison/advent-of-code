@@ -2,25 +2,16 @@ package com.hutchison.calendar.intcode.operation.base;
 
 import com.hutchison.calendar.intcode.Codes;
 import com.hutchison.calendar.intcode.operation.Operation;
-import com.hutchison.calendar.intcode.operation.ParamMode;
-
-import java.util.List;
-
-import static com.hutchison.calendar.intcode.operation.Operation.getOpCodeString;
-import static com.hutchison.calendar.intcode.operation.Operation.validateCursorPosition;
 
 public class AddToBaseOperation implements Operation {
     @Override
-    public Codes apply(Codes incomingCodes) {
-        int cursor = incomingCodes.getCursor();
-        List<Double> codes = incomingCodes.getCodes();
-        validateCursorPosition(cursor + 1, codes.size());
-        String opCodeString = getOpCodeString(codes.get(cursor));
+    public Codes apply(Codes codes) {
+        int cursor = codes.getCursor();
         int position = cursor + 1;
-        double baseDelta = Operation.getValueFromCodes(codes, ParamMode.fromChar(opCodeString.charAt(0)), position);
-        return incomingCodes.toBuilder()
+        double baseDelta = codes.getParameterizedValues(1).get(0);
+        return codes.toBuilder()
                 .cursor(cursor + 2)
-                .relativeBase(incomingCodes.getRelativeBase() + baseDelta)
+                .relativeBase(codes.getRelativeBase() + baseDelta)
                 .build();
     }
 }

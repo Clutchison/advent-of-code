@@ -1,11 +1,15 @@
 package com.hutchison.calendar.intcode;
 
 import com.hutchison.calendar.intcode.operation.OpType;
+import com.hutchison.calendar.intcode.operation.ParamMode;
 import lombok.Builder;
 import lombok.Value;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Value
 public class Codes {
@@ -27,13 +31,34 @@ public class Codes {
         this.relativeBase = relativeBase;
     }
 
-    public List<Double> getCodes() {
+    private List<Double> getCodes() {
         return new ArrayList<>(codes);
     }
 
-    public double getCode(int position) {
-        if (position < 0 || position >= codes.size()) throw new RuntimeException("Position out of bounds.");
+    public List<Double> getParameterizedValues(int numberOfValues) {
+        if (numberOfValues > 5) throw new RuntimeException("Parameterized values cannot exceed 5.");
+        String opCodeString = getOpCodeString(cursor);
+        return IntStream.range(0, numberOfValues).mapToObj(i -> i)
+                .map(
+                    return ParamMode.fromChar(
+                        opCodeString.charAt(i)).getFunction()
+                        .apply(this, cursor + i + 1)) }
+                .collect(Collectors.toList());
+    }
+
+    public Double getCode(int position) {
+        if (position < 0) throw new RuntimeException("Position out of bounds.");
+        fillCodesToPosition(position);
         return codes.get(position);
+    }
+
+    public void setCode(int position, double code) {
+        fillCodesToPosition(position);
+        codes.set(position, code);
+    }
+
+    public int size() {
+        return codes.size();
     }
 
     public OpType getOpType() {
@@ -47,6 +72,21 @@ public class Codes {
         return outputs.size() > 0 ?
                 outputs.get(outputs.size() - 1) :
                 -1;
+    }
+
+    String getOpCodeString(double position) {
+        String sub = String.valueOf(position).substring(0, String.valueOf(position).indexOf("."));
+        String s = StringUtils.leftPad(sub, 5, "0");
+        return new StringBuilder().append(s, 0, s.length() - 2).reverse().toString();
+    }
+
+    private void fillCodesToPosition(int position) {
+        if (position >= codes.size()) {
+            codes.addAll(
+                    IntStream.range(0, position + 1 - codes.size())
+                            .mapToObj(i -> 0.0)
+                            .collect(Collectors.toList()));
+        }
     }
 
     public static class CodesBuilder {

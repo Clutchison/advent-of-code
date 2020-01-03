@@ -15,10 +15,11 @@ public class Day9 extends Day {
                         .get(0)
                         .split(","))
                         .map(Double::valueOf)
-                        .collect(Collectors.toList())
+                        .collect(Collectors.toList()),
+                false
         );
         double output = computer.run(Collections.singletonList(1.0));
-        System.out.println("Output: " + output);
+        System.out.println(String.format("Output: %.0f", output));
     }
 
     @Override
