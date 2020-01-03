@@ -15,10 +15,10 @@ public class Codes {
     boolean stopped;
     List<Double> inputs;
     List<Double> outputs;
-    int relativeBase;
+    Double relativeBase;
 
     @Builder(toBuilder = true)
-    private Codes(List<Double> codes, Integer cursor, boolean stopped, List<Double> inputs, List<Double> outputs, int relativeBase) {
+    private Codes(List<Double> codes, Integer cursor, boolean stopped, List<Double> inputs, List<Double> outputs, Double relativeBase) {
         this.codes = codes;
         this.cursor = cursor;
         this.stopped = stopped;
@@ -58,7 +58,7 @@ public class Codes {
                     this.stopped && this.cursor < this.codes.size(),
                     this.inputs == null ? new ArrayList<>() : new ArrayList<>(this.inputs),
                     this.outputs == null ? new ArrayList<>() : new ArrayList<>(this.outputs),
-                    0);
+                    this.relativeBase == null ? 0 : this.relativeBase);
         }
     }
 }

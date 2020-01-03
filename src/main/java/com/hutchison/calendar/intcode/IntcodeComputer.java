@@ -3,6 +3,7 @@ package com.hutchison.calendar.intcode;
 import com.hutchison.calendar.intcode.operation.OpType;
 import lombok.Getter;
 
+import javax.naming.PartialResultException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +19,9 @@ public class IntcodeComputer {
     }
 
     public static IntcodeComputer fromList(List<Double> codes) {
-        return fromList(codes, null);
-    }
-
-    public static IntcodeComputer fromList(List<Double> codes, List<Double> inputs) {
         return new IntcodeComputer(Codes.builder()
                 .codes(new ArrayList<>(codes))
                 .cursor(0)
-                .inputs(inputs)
                 .stopped(false)
                 .build());
     }

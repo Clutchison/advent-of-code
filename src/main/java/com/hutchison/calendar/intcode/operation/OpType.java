@@ -2,6 +2,7 @@ package com.hutchison.calendar.intcode.operation;
 
 import com.hutchison.calendar.intcode.operation.arithmetic.AddOperation;
 import com.hutchison.calendar.intcode.operation.arithmetic.MultiplyOperation;
+import com.hutchison.calendar.intcode.operation.base.AddToBaseOperation;
 import com.hutchison.calendar.intcode.operation.bool.EqualsOperation;
 import com.hutchison.calendar.intcode.operation.bool.LessThanOperation;
 import com.hutchison.calendar.intcode.operation.io.InputOperation;
@@ -24,6 +25,7 @@ public enum OpType {
     JUMP_IF_FALSE(6, new JumpIfFalseOperation()),
     LESS_THAN(7, new LessThanOperation()),
     EQUALS(8, new EqualsOperation()),
+    ADD_TO_BASE(9, new AddToBaseOperation()),
     STOP(99, new StopOperation());
 
     @Getter
