@@ -20,7 +20,7 @@ import java.util.Map;
 @Value
 public class AdventCalendar {
 
-    private static final int DEFAULT_DAY = 9;
+    private static final int DEFAULT_DAY = 10;
     private static final int DEFAULT_PART = 1;
 
     // 2018
