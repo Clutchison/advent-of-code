@@ -6,22 +6,16 @@ import com.hutchison.calendar.intcode.operation.Operation;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static com.hutchison.calendar.intcode.operation.Operation.getValueFromCodes;
-import static com.hutchison.calendar.intcode.operation.Operation.validateCursorPosition;
-import static com.hutchison.calendar.intcode.operation.ParamMode.fromChar;
-
 public abstract class JumpOperation implements Operation {
 
-    protected final Codes jumpIfTrue(Codes incomingCodes, Predicate<Integer> predicate) {
-        List<Integer> codes = incomingCodes.getCodes();
-        int cursor = incomingCodes.getCursor();
-        validateCursorPosition(cursor + 2, codes.size());
-        String opString = Operation.getOpCodeString(codes.get(cursor));
-        boolean shouldJump = predicate.test(getValueFromCodes(codes, fromChar(opString.charAt(0)), cursor + 1));
+    protected final Codes jumpIfTrue(Codes codes, Predicate<Double> predicate) {
+        int cursor = codes.getCursor();
+        List<Double> values = codes.getParameterizedValues(2);
+        boolean shouldJump = predicate.test(values.get(0));
         Integer newCursor = shouldJump ?
-                getValueFromCodes(codes, fromChar(opString.charAt(1)), cursor + 2) :
+                values.get(1).intValue() :
                 cursor + 3;
-        return incomingCodes.toBuilder()
+        return codes.toBuilder()
                 .cursor(newCursor)
                 .build();
     }

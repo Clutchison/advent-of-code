@@ -18,16 +18,22 @@ public class AmplifierSeries {
         this.phaseSequence = phaseSequence;
     }
 
-    public int getOutput() {
-        int output = 0;
+    public double getOutput() {
+        double output = 0;
         List<Amplifier> tempAmps = amplifiers.stream().map(a -> a.toBuilder().build()).collect(Collectors.toList());
-        while (true) {
+        while (anAmplifierIsRunning()) { // stupid
             for (Amplifier amplifier : tempAmps) {
-                int returnedValue = amplifier.compute(output);
+                double returnedValue = amplifier.compute(output);
                 if (returnedValue == -1) return output;
                 output = returnedValue;
             }
         }
+        return output;
+    }
+
+    private boolean anAmplifierIsRunning() {
+        return amplifiers.stream()
+                .anyMatch(Amplifier::isRunning);
     }
 
     public static AmplifierSeriesBuilder builder() {
@@ -36,13 +42,13 @@ public class AmplifierSeries {
 
     public static class AmplifierSeriesBuilder {
 
-        private List<Integer> codes;
+        private List<Double> codes;
         private PhaseSequence phaseSequence;
 
         private AmplifierSeriesBuilder() {
         }
 
-        public AmplifierSeriesBuilder codes(List<Integer> codes) {
+        public AmplifierSeriesBuilder codes(List<Double> codes) {
             this.codes = codes;
             return this;
         }
@@ -58,7 +64,7 @@ public class AmplifierSeries {
             if (codes == null) throw new RuntimeException("Codes required to build AmplifierSeries");
             List<Amplifier> amplifiers = phaseSequence.getPhases().stream()
                     .map(phase -> Amplifier.builder()
-                            .computer(IntcodeComputer.fromList(codes))
+                            .computer(IntcodeComputer.fromList(codes, true))
                             .phase(phase)
                             .build())
                     .collect(Collectors.toList());

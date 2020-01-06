@@ -12,40 +12,42 @@ import static com.hutchison.calendar.intcode.operation.OpType.OUTPUT;
 public class IntcodeComputer {
 
     private Codes codes;
+    boolean seriesMode;
 
-    private IntcodeComputer(Codes codes) {
+    private IntcodeComputer(Codes codes, Boolean seriesMode) {
         this.codes = codes;
+        this.seriesMode = seriesMode;
     }
 
-    public static IntcodeComputer fromList(List<Integer> codes) {
-        return fromList(codes, null);
-    }
-
-    public static IntcodeComputer fromList(List<Integer> codes, List<Integer> inputs) {
+    public static IntcodeComputer fromList(List<Double> codes, boolean seriesMode) {
         return new IntcodeComputer(Codes.builder()
                 .codes(new ArrayList<>(codes))
                 .cursor(0)
-                .inputs(inputs)
                 .stopped(false)
-                .build());
+                .build(),
+                seriesMode);
     }
 
     public boolean hasStarted() {
         return codes.getCursor() > 0;
     }
 
-    public int run() {
+    public double run() {
         return run(new ArrayList<>());
     }
 
-    public int run(List<Integer> inputs) {
+    public double run(List<Double> inputs) {
         codes = codes.toBuilder().inputs(inputs).build();
         while (!codes.isStopped()) {
             OpType opType = codes.getOpType();
-            boolean shouldReturn = opType.equals(OUTPUT);
             codes = opType.getOp().apply(codes);
-            if (shouldReturn) return codes.getLastOutput();
+            if (opType.equals(OUTPUT) && seriesMode)
+                return codes.getLastOutput();
         }
-        return -1;
+        return codes.getLastOutput();
+    }
+
+    public boolean isRunning() {
+        return !codes.isStopped();
     }
 }

@@ -14,28 +14,25 @@ public class InputOperation implements Operation {
     /**
      * Applies this function to the given argument.
      *
-     * @param incomingCodes the function argument
+     * @param codes the function argument
      * @return the function result
      */
     @Override
-    public Codes apply(Codes incomingCodes) {
-        List<Integer> inputs = new ArrayList<>(incomingCodes.getInputs());
-        List<Integer> codes = incomingCodes.getCodes();
-        Integer cursor = incomingCodes.getCursor();
-        Operation.validateCursorPosition(cursor + 1, codes.size());
+    public Codes apply(Codes codes) {
+        List<Double> inputs = new ArrayList<>(codes.getInputs());
+        Integer cursor = codes.getCursor();
 
-        int input;
-        if (inputs == null || inputs.size() == 0) {
+        double input;
+        if (inputs.size() == 0) {
             input = getInput();
         } else {
             input = inputs.get(0);
             inputs.remove(0);
         }
-        Integer insertIndex = codes.get(cursor + 1);
-        codes.set(insertIndex, input);
+        int writeIndex = codes.getParameterizedIndex(1);
+        codes.setCode(writeIndex, input);
 
-        return incomingCodes.toBuilder()
-                .codes(codes)
+        return codes.toBuilder()
                 .cursor(cursor + 2)
                 .inputs(inputs)
                 .build();

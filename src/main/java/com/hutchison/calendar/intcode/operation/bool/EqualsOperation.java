@@ -11,6 +11,6 @@ public class EqualsOperation extends BooleanOperation {
      */
     @Override
     public Codes apply(Codes incomingCodes) {
-        return storeBoolean(incomingCodes, Integer::equals);
+        return storeBoolean(incomingCodes, Double::equals);
     }
 }

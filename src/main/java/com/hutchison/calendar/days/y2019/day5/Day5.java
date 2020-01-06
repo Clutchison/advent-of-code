@@ -20,14 +20,14 @@ public class Day5 extends Day {
     }
 
     private void run() {
-        IntcodeComputer computer = IntcodeComputer.fromList(getMappedInput());
+        IntcodeComputer computer = IntcodeComputer.fromList(getMappedInput(), false);
         computer.run();
         console.print("Answer: " + computer.getCodes().getCode(0));
     }
 
-    private List<Integer> getMappedInput() {
+    private List<Double> getMappedInput() {
         return Arrays.stream(input.get(0).split(","))
-                .map(Integer::parseInt)
+                .map(Double::parseDouble)
                 .collect(Collectors.toList());
     }
 }

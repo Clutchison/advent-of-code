@@ -12,6 +12,6 @@ public class AddOperation extends ArithmeticOperation {
      */
     @Override
     public Codes apply(Codes incomingCodes) {
-        return performArithmetic(incomingCodes, Integer::sum);
+        return performArithmetic(incomingCodes, Double::sum);
     }
 }
