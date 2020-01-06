@@ -31,10 +31,6 @@ public class Codes {
         this.relativeBase = relativeBase;
     }
 
-    private List<Double> getCodes() {
-        return new ArrayList<>(codes);
-    }
-
     public List<Double> getParameterizedValues(int numberOfValues) {
         if (numberOfValues > 5) throw new RuntimeException("Parameterized values cannot exceed 5.");
         String opCodeString = getOpCodeString(cursor);
