@@ -27,6 +27,10 @@ public class Amplifier {
         return computer.run(inputs);
     }
 
+    public boolean isRunning() {
+        return computer.isRunning();
+    }
+
     static class AmplifierBuilder {
         protected Amplifier build() {
             if (this.phase == null) throw new RuntimeException("Phase required to build amplifier.");

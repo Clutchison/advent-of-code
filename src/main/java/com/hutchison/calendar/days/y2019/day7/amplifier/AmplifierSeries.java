@@ -21,13 +21,19 @@ public class AmplifierSeries {
     public double getOutput() {
         double output = 0;
         List<Amplifier> tempAmps = amplifiers.stream().map(a -> a.toBuilder().build()).collect(Collectors.toList());
-        while (true) {
+        while (anAmplifierIsRunning()) { // stupid
             for (Amplifier amplifier : tempAmps) {
                 double returnedValue = amplifier.compute(output);
                 if (returnedValue == -1) return output;
                 output = returnedValue;
             }
         }
+        return output;
+    }
+
+    private boolean anAmplifierIsRunning() {
+        return amplifiers.stream()
+                .anyMatch(Amplifier::isRunning);
     }
 
     public static AmplifierSeriesBuilder builder() {

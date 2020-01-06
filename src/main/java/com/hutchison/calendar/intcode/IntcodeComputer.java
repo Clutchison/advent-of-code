@@ -38,14 +38,16 @@ public class IntcodeComputer {
 
     public double run(List<Double> inputs) {
         codes = codes.toBuilder().inputs(inputs).build();
-        int commands = 0;
         while (!codes.isStopped()) {
-            commands++;
             OpType opType = codes.getOpType();
             codes = opType.getOp().apply(codes);
-            if (opType.equals(OUTPUT) && seriesMode) return codes.getLastOutput();
+            if (opType.equals(OUTPUT) && seriesMode)
+                return codes.getLastOutput();
         }
-        System.out.println("Command total: " + commands);
         return codes.getLastOutput();
+    }
+
+    public boolean isRunning() {
+        return !codes.isStopped();
     }
 }

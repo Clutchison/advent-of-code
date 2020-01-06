@@ -29,7 +29,7 @@ public class InputOperation implements Operation {
             input = inputs.get(0);
             inputs.remove(0);
         }
-        int writeIndex = codes.getParameterizedValues(1).get(0).intValue();
+        int writeIndex = codes.getParameterizedIndex(1);
         codes.setCode(writeIndex, input);
 
         return codes.toBuilder()

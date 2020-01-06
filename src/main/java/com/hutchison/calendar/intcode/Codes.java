@@ -19,10 +19,10 @@ public class Codes {
     boolean stopped;
     List<Double> inputs;
     List<Double> outputs;
-    Double relativeBase;
+    Integer relativeBase;
 
     @Builder(toBuilder = true)
-    private Codes(List<Double> codes, Integer cursor, boolean stopped, List<Double> inputs, List<Double> outputs, Double relativeBase) {
+    private Codes(List<Double> codes, Integer cursor, boolean stopped, List<Double> inputs, List<Double> outputs, Integer relativeBase) {
         this.codes = codes;
         this.cursor = cursor;
         this.stopped = stopped;
@@ -38,12 +38,22 @@ public class Codes {
     public List<Double> getParameterizedValues(int numberOfValues) {
         if (numberOfValues > 5) throw new RuntimeException("Parameterized values cannot exceed 5.");
         String opCodeString = getOpCodeString(cursor);
-        return IntStream.range(0, numberOfValues).mapToObj(i -> i)
-                .map(
-                    return ParamMode.fromChar(
-                        opCodeString.charAt(i)).getFunction()
-                        .apply(this, cursor + i + 1)) }
+        return IntStream.range(0, numberOfValues)
+                .mapToObj(i -> {
+                    ParamMode paramMode = ParamMode.fromChar(
+                            opCodeString.charAt(i));
+                    return paramMode.getFunction()
+                            .apply(this, cursor + i + 1);
+                })
                 .collect(Collectors.toList());
+    }
+
+    public int getParameterizedIndex(int cursorDelta) {
+        ParamMode paramMode = ParamMode.fromChar(getOpCodeString(cursor).charAt(cursorDelta - 1));
+        if (paramMode == ParamMode.IMMEDIATE) throw new RuntimeException("Index cannot be in Immediate mode.");
+        int i = codes.get(cursor + cursorDelta).intValue() +
+                (paramMode == ParamMode.RELATIVE ? relativeBase : 0);
+        return i;
     }
 
     public Double getCode(int position) {
@@ -74,8 +84,9 @@ public class Codes {
                 -1;
     }
 
-    String getOpCodeString(double position) {
-        String sub = String.valueOf(position).substring(0, String.valueOf(position).indexOf("."));
+    String getOpCodeString(int position) {
+        String codeString = String.valueOf(codes.get(position));
+        String sub = codeString.substring(0, codeString.indexOf("."));
         String s = StringUtils.leftPad(sub, 5, "0");
         return new StringBuilder().append(s, 0, s.length() - 2).reverse().toString();
     }
