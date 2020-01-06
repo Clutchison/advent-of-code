@@ -1,6 +1,7 @@
 package com.hutchison.calendar;
 
 import com.hutchison.calendar.days.y2019.day1.Day1;
+import com.hutchison.calendar.days.y2019.day10.Day10;
 import com.hutchison.calendar.days.y2019.day2.Day2;
 import com.hutchison.calendar.days.y2019.day3.Day3;
 import com.hutchison.calendar.days.y2019.day4.Day4;
@@ -39,6 +40,7 @@ public class AdventCalendar {
         put(7, Day7.class);
         put(8, Day8.class);
         put(9, Day9.class);
+        put(10, Day10.class);
     }};
 
     public void run() {

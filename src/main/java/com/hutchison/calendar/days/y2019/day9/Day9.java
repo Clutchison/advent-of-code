@@ -10,6 +10,15 @@ import java.util.stream.Collectors;
 public class Day9 extends Day {
     @Override
     public void part1() {
+        run(1.0);
+    }
+
+    @Override
+    public void part2() {
+        run(2.0);
+    }
+
+    private void run(double input) {
         IntcodeComputer computer = IntcodeComputer.fromList(
                 Arrays.stream(getInput()
                         .get(0)
@@ -18,12 +27,7 @@ public class Day9 extends Day {
                         .collect(Collectors.toList()),
                 false
         );
-        double output = computer.run(Collections.singletonList(1.0));
+        double output = computer.run(Collections.singletonList(input));
         System.out.println(String.format("Output: %.0f", output));
-    }
-
-    @Override
-    public void part2() {
-
     }
 }
