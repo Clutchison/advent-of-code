@@ -11,24 +11,23 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 public enum Quadrant {
-    FIRST(true, true, q -> getDegreesFromQuotient(q.getQuotient())),
-    SECOND(false, true, q -> 180 + getDegreesFromQuotient(q.getQuotient())), // 180 - angle.abs
-    THIRD(false, false, q -> 180 + getDegreesFromQuotient(q.getQuotient())), // angle + 180
-    FOURTH(true, false, q -> 360 + getDegreesFromQuotient(q.getQuotient())); // 360 - angle.abs
+    FIRST(new Direction(true, true), q -> Math.atan(q.getQuotient())),
+    SECOND(new Direction(false, true), q -> 180 + Math.atan(q.getQuotient())), // 180 - angle.abs
+    THIRD(new Direction(false, false), q -> 180 + Math.atan(q.getQuotient())), // angle + 180
+    FOURTH(new Direction(true, false), q -> 360 + Math.atan(q.getQuotient())); // 360 - angle.abs
 
-    final boolean positiveY;
-    final boolean positiveX;
+    private final Direction direction;
     @Getter
-    final Function<Slope, Double> quadrantAngle;
+    private final Function<Slope, Double> quadrantAngle;
+
     private static final Map<Direction, Quadrant> map = new HashMap<>();
 
     static {
-        Stream.of(Quadrant.values()).forEach(q -> map.put(new Direction(q.positiveY, q.positiveX), q));
+        Stream.of(Quadrant.values()).forEach(q -> map.put(q.direction, q));
     }
 
-    Quadrant(boolean positiveY, boolean positiveX, Function<Slope, Double> quadrantAngle) {
-        this.positiveY = positiveY;
-        this.positiveX = positiveX;
+    Quadrant(Direction direction, Function<Slope, Double> quadrantAngle) {
+        this.direction = direction;
         this.quadrantAngle = quadrantAngle;
     }
 
@@ -38,11 +37,6 @@ public enum Quadrant {
 
     public static int indexOf(Quadrant quadrant) {
         return Arrays.asList(Quadrant.values()).indexOf(quadrant);
-    }
-
-    private static double getDegreesFromQuotient(Float quotient) {
-        double v = Math.atan(quotient) * 180 / Math.PI;
-        return v;
     }
 
     @Value

@@ -2,6 +2,7 @@ package com.hutchison.calendar;
 
 import com.hutchison.calendar.days.y2019.day1.Day1;
 import com.hutchison.calendar.days.y2019.day10.Day10;
+import com.hutchison.calendar.days.y2019.day11.Day11;
 import com.hutchison.calendar.days.y2019.day2.Day2;
 import com.hutchison.calendar.days.y2019.day3.Day3;
 import com.hutchison.calendar.days.y2019.day4.Day4;
@@ -20,8 +21,8 @@ import java.util.Map;
 @Value
 public class AdventCalendar {
 
-    private static final int DEFAULT_DAY = 10;
-    private static final int DEFAULT_PART = 2;
+    private static final int DEFAULT_DAY = 11;
+    private static final int DEFAULT_PART = 1;
 
     // 2018
 //    private static final Map<Integer, Class> days = new HashMap<Integer, Class>() {{
@@ -41,6 +42,7 @@ public class AdventCalendar {
         put(8, Day8.class);
         put(9, Day9.class);
         put(10, Day10.class);
+        put(11, Day11.class);
     }};
 
     public void run() {
