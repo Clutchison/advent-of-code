@@ -1,11 +1,11 @@
 package com.hutchison.calendar.intcode.operation.io;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.Operation;
+import com.hutchison.calendar.intcode.operation.UnaryOperation;
 
 import java.util.List;
 
-public class OutputOperation implements Operation {
+public class OutputOperation implements UnaryOperation {
     /**
      * Applies this function to the given argument.
      *

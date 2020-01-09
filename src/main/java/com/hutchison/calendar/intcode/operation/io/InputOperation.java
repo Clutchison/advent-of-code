@@ -1,13 +1,13 @@
 package com.hutchison.calendar.intcode.operation.io;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.Operation;
+import com.hutchison.calendar.intcode.operation.UnaryOperation;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class InputOperation implements Operation {
+public class InputOperation implements UnaryOperation {
 
     private final Scanner in = new Scanner(System.in);
 

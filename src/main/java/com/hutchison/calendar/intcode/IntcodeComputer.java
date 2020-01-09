@@ -1,22 +1,22 @@
 package com.hutchison.calendar.intcode;
 
-import com.hutchison.calendar.intcode.operation.OpType;
+import com.hutchison.calendar.intcode.operation.Operation;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.hutchison.calendar.intcode.operation.OpType.OUTPUT;
+import static com.hutchison.calendar.intcode.operation.Operation.OUTPUT;
 
 @Getter
 public class IntcodeComputer {
 
     private Codes codes;
-    boolean seriesMode;
+    boolean stopOnOutput;
 
-    private IntcodeComputer(Codes codes, Boolean seriesMode) {
+    private IntcodeComputer(Codes codes, Boolean stopOnOutput) {
         this.codes = codes;
-        this.seriesMode = seriesMode;
+        this.stopOnOutput = stopOnOutput;
     }
 
     public static IntcodeComputer fromList(List<Double> codes, boolean seriesMode) {
@@ -39,9 +39,9 @@ public class IntcodeComputer {
     public double run(List<Double> inputs) {
         codes = codes.toBuilder().inputs(inputs).build();
         while (!codes.isStopped()) {
-            OpType opType = codes.getOpType();
-            codes = opType.getOp().apply(codes);
-            if (opType.equals(OUTPUT) && seriesMode)
+            Operation operation = codes.getOpType();
+            codes = operation.apply(codes);
+            if (operation.equals(OUTPUT) && stopOnOutput)
                 return codes.getLastOutput();
         }
         return codes.getLastOutput();

@@ -24,7 +24,7 @@ public class AsteroidMap {
                                 .count()
                         )
                 )
-                .max(Comparator.comparing(coordinateAsteroidsInSightMapping -> coordinateAsteroidsInSightMapping.getAsteroidsInSight()))
+                .max(Comparator.comparing(CoordinateAsteroidsInSightMapping::getAsteroidsInSight))
                 .orElseThrow(() -> new RuntimeException("Failed to find best asteroid spot."));
     }
 
@@ -64,7 +64,6 @@ public class AsteroidMap {
                 .filter(slope -> slopeCoordMap.get(slope).size() > 0)
                 .collect(Collectors.toList()));
     }
-
 
     public static AsteroidMap fromInput(List<List<Character>> input) {
         return new AsteroidMap(IntStream.range(0, input.size())

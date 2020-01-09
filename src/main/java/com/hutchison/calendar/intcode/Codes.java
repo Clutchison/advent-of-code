@@ -1,6 +1,6 @@
 package com.hutchison.calendar.intcode;
 
-import com.hutchison.calendar.intcode.operation.OpType;
+import com.hutchison.calendar.intcode.operation.Operation;
 import com.hutchison.calendar.intcode.operation.ParamMode;
 import lombok.Builder;
 import lombok.Value;
@@ -67,11 +67,11 @@ public class Codes {
         return codes.size();
     }
 
-    public OpType getOpType() {
+    public Operation getOpType() {
         Double code = codes.get(cursor);
-        OpType opType = OpType.fromCode(code);
-        if (opType == null) throw new RuntimeException("No OpType for code: " + code);
-        return opType;
+        Operation operation = Operation.fromCode(code);
+        if (operation == null) throw new RuntimeException("No OpType for code: " + code);
+        return operation;
     }
 
     public double getLastOutput() {

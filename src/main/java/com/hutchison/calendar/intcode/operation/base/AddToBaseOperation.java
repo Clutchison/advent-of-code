@@ -1,9 +1,9 @@
 package com.hutchison.calendar.intcode.operation.base;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.Operation;
+import com.hutchison.calendar.intcode.operation.UnaryOperation;
 
-public class AddToBaseOperation implements Operation {
+public class AddToBaseOperation implements UnaryOperation {
     @Override
     public Codes apply(Codes codes) {
         int cursor = codes.getCursor();

@@ -1,12 +1,12 @@
 package com.hutchison.calendar.intcode.operation.jump;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.Operation;
+import com.hutchison.calendar.intcode.operation.UnaryOperation;
 
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class JumpOperation implements Operation {
+public abstract class JumpOperation implements UnaryOperation {
 
     protected final Codes jumpIfTrue(Codes codes, Predicate<Double> predicate) {
         int cursor = codes.getCursor();

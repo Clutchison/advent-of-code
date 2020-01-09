@@ -1,9 +1,9 @@
 package com.hutchison.calendar.intcode.operation.stop;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.Operation;
+import com.hutchison.calendar.intcode.operation.UnaryOperation;
 
-public class StopOperation implements Operation {
+public class StopOperation implements UnaryOperation {
     /**
      * Applies this function to the given argument.
      *

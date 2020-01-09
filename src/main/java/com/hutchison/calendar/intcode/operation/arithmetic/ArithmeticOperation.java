@@ -1,12 +1,12 @@
 package com.hutchison.calendar.intcode.operation.arithmetic;
 
 import com.hutchison.calendar.intcode.Codes;
-import com.hutchison.calendar.intcode.operation.Operation;
+import com.hutchison.calendar.intcode.operation.UnaryOperation;
 
 import java.util.List;
 import java.util.function.BiFunction;
 
-abstract class ArithmeticOperation implements Operation {
+abstract class ArithmeticOperation implements UnaryOperation {
 
 
     final Codes performArithmetic(Codes codes, BiFunction<Double, Double, Double> function) {
