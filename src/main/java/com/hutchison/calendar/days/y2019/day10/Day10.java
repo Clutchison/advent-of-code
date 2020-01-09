@@ -6,7 +6,6 @@ import com.hutchison.calendar.days.y2019.day10.AsteroidMap.CoordinateAsteroidsIn
 import java.util.List;
 import java.util.stream.Collectors;
 
-// todo: 303
 public class Day10 extends Day {
     @Override
     public void part1() {
@@ -23,12 +22,16 @@ public class Day10 extends Day {
                 .collect(Collectors.toList());
     }
 
-    @Override
+    @Override // todo wrong: 1603 219 1504
     public void part2() {
         AsteroidMap map = AsteroidMap.fromInput(getAsteroidInput());
         CoordinateAsteroidsInSightMapping bestLaserLocation = map.getBestMonitoringAsteroid();
         Coordinate coordinate = bestLaserLocation.getCoordinate();
-
+//        Coordinate coordinate = new Coordinate(8, 3);
+        Coordinate lastDestroyedAsteroid = map.getDestroyedAsteroidCoordinates(coordinate, 200);
+        console.print(String.format("Last destroyed asteroid coords: %s. Weird math: %d",
+                lastDestroyedAsteroid.toString(),
+                lastDestroyedAsteroid.getX() * 100 + lastDestroyedAsteroid.getY()));
 
 
     }
